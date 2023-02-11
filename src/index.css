@@ -1,0 +1,114 @@
+html {
+    scroll-behavior: smooth;
+    background-color: #292A2D; /* TODO: Deviendra un canva apres */
+    color: white; /* TODO: Trouver une meilleure couleur */
+}
+
+/* Header */
+
+header {
+    display: flex;
+    letter-spacing: 1px;
+    position: fixed;
+    padding-top: 8px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transition: linear 0.2s;
+}
+
+.scrolled{
+    background-color: #292A2D; /* TODO: Deviendra un canva apres */
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,1);
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,1);}
+
+#nav_links {
+    display: flex;
+    padding: 0;
+    justify-content: flex-end;
+}
+
+.inside_link_item {
+    display: inline;
+}
+
+.inside_link {
+    color: white; /* TODO: Trouver une meilleure couleur */
+    padding: 10px 20px;
+    transition: cubic-bezier(0.09, 0.79, 0.87, 0.86) 0.3s;
+    border-radius: 3px;
+}
+
+.inside_link_item>.inside_link:hover {
+    /* Todo: to change */
+    background-color: white;
+    color: black;
+}
+
+#my_name {
+    flex-grow: 0.85;
+    margin-left: 20px;
+}
+
+#header_nav {
+    flex-grow: 0.15;
+}
+
+/* Footer */
+
+footer {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #202124;
+    position: relative;
+    width: 100%;
+    bottom: -8px;
+    left: -8px;
+    padding: 0 8px;
+}
+
+.footer_list {
+    padding-inline-start: 0;
+}
+
+.footer_item {
+    display: block;
+}
+
+.link_desc{
+    font-weight: 500;
+}
+
+/* Main */
+
+h1{
+    text-align: center;
+}
+
+#summary{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#summary_name{
+    font-size: 4em;
+    text-align: center;
+    margin-block-end: 20px;
+}
+
+#summary_motto{
+    font-size: 1.8em;
+    text-align: center; /* TODO: Bold font moins gras que l'élément du dessus */
+    margin-block-start: 0;
+}
+
+/* Other */
+
+a{
+    color:rgb(108, 178, 236);
+    text-decoration: none;
+}
