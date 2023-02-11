@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "csslint": "^1.0.5",
+    "eslint": "^8.34.0",
+    "htmlhint": "^1.1.4",
+    "randomcolor": "^0.6.2",
+    "validator": "^13.9.0"
+  }
+}
