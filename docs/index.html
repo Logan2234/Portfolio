@@ -7,10 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Home</title>
     <link rel="stylesheet" type="text/css" href="index.css">
-    <script src="index.js" defer="true"></script>
+    <link rel="icon" href="assets/icone.png">
+    <script src="index.js"></script>
+    <!-- <script src="../node_modules/randomcolor/randomColor.js"></script> -->
+    <script src="background.js" defer="true"></script>
 </head>
 
 <body>
+    <canvas></canvas>
     <header>
         <p id="my_name"><a class="inside_link" href="#top">Logan Willem</a></p>
         <nav id="header_nav">
@@ -24,9 +28,18 @@
 
     <main id="top">
         <section id="summary">
-            <img src=""> <!-- TODO -->
+            <img id="photo" src="assets/icone.png"> <!-- TODO -->
             <h1 id="summary_name">Logan Willem</h1>
             <h3 id="summary_motto">Student, Developer, Passionate</h3>
+            <div id="social_media">
+                <ul>
+                    <li class="media"><a href="mailto:loganwi322@gmail.com"><img src="assets/gmail.svg" alt="Logo GMail" height="30px" width="30px"></a></li>
+                    <li class="media"><a target="_blank" href="https://www.linkedin.com/in/logan-willem/"><img src="assets/linkedin.svg" alt="Logo Linkedin" height="30px" width="30px"></a></li>
+                    <li class="media"><a target="_blank" href="https://github.com/Logan2234/"><img src="assets/github.svg" alt="Logo GitHub" height="30px" width="30px"></a></li>
+                    <li class="media"><a target="_blank" href="https://www.facebook.com/logan.wi322/"><img src="assets/facebook.svg" alt="Logo Facebook" height="30px" width="30px"></a></li>
+                    <li class="media"><a target="_blank" href="https://steamcommunity.com/id/logan2234/"><img src="assets/steam.svg" alt="Logo Steam" height="30px" width="30px"></a></li>
+                </ul>
+            </div>
         </section>
         <section id="about">
             <h1>About</h1>
