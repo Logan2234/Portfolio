@@ -7,6 +7,7 @@ const NB_PARTICLES = Math.round(window.innerWidth * window.innerHeight / 15000);
 const DIST_LINK = 90;
 
 let color_mode = 0; // 0 = colorless, 1 = colorful
+let mode = 0; // 0 = normal, 1 = gravity
 
 function distance(ax, ay, bx, by) {
     return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
@@ -19,6 +20,8 @@ class Particle {
     #vy;
     #angle;
     #color;
+    #mode; // 0 = normal, 1 = attractive, 2 = repulsive
+
     constructor(x, y) {
         this.#x = x;
         this.#y = y;
@@ -26,6 +29,7 @@ class Particle {
         this.#vx = Math.cos(this.#angle);
         this.#vy = Math.sin(this.#angle);
         this.#color = "rgb(150,150,150)";
+        this.#mode = 0;
     }
 
     getX() {
@@ -38,6 +42,21 @@ class Particle {
 
     setColor(new_color) {
         this.#color = new_color;
+    }
+
+    resetMode() {
+        this.#mode = 0;
+        this.#color = "rgb(150,150,150)";
+    }
+
+    modeRepulsive() {
+        this.#mode = 2;
+        this.#color = "rgb(200, 0, 0)";
+    }
+
+    modeAttractive() {
+        this.#mode = 1;
+        this.#color = "rgb(0, 0, 200)";
     }
 
     draw() {
@@ -115,21 +134,53 @@ function mouse_click() {
     particle_array.push(new Particle(pos_x, pos_y));
 }
 
+function toggleColor() {
+    if (color_mode) {
+        for (elt of particle_array) {
+            elt.setColor("rgb(150, 150, 150)");
+        }
+        color_mode = 0;
+    }
+    else {
+        for (elt of particle_array) {
+            elt.setColor(randomColor());
+        }
+        mode = 0;
+        color_mode = 1;
+    }
+}
+
+function toggleGravity() {
+    if (mode) {
+        for (elt of particle_array) {
+            elt.resetMode();
+        }
+        mode = 0;
+    }
+    else {
+        for (elt of particle_array) {
+            if (Math.random() <= 0.5) {
+                elt.modeRepulsive();
+            }
+            else {
+                elt.modeAttractive();
+            }
+        }
+        color_mode = 0;
+        mode = 1;
+    }
+}
+
 function keyHandler() {
     let key_pressed = window.event.keyCode;
-    let ctrl_pressed = window.event.ctrlKey;
-    if (key_pressed == 10 && ctrl_pressed) {
-        if (color_mode) {
-            for (elt of particle_array) {
-                elt.setColor("rgb(150, 150, 150)");
-            }
-            color_mode = 0;
+    let shift_pressed = window.event.shiftKey;
+    if (shift_pressed) {
+        console.log(key_pressed);
+        if (key_pressed == 13) {
+            toggleColor();
         }
-        else {
-            for (elt of particle_array) {
-                elt.setColor(randomColor());
-            }
-            color_mode = 1;
+        else if (key_pressed == 32) {
+            toggleGravity();
         }
     }
 }
