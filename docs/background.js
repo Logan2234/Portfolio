@@ -3,8 +3,9 @@ const canvas = document.getElementsByTagName("canvas")[0];
 const ctx = canvas.getContext("2d");
 
 const particle_array = [];
-const NB_PARTICLES = 80;
-const DIST_LINK = 100;
+const NB_PARTICLES = Math.round(window.innerWidth * window.innerHeight/15000);
+const DIST_LINK = 90;
+
 function distance(a, b) {
     return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
 }
