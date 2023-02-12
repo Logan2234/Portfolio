@@ -6,8 +6,23 @@ html {
     /* TODO: Trouver une meilleure couleur */
     overflow-x: hidden;
 }
+*{
+    font-family: 'Times New Roman', Times, serif;
+}
+body {
+    margin: 0;
+}
 
 /* Header */
+
+#test {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(70, 197, 123);
+    width: 0;
+    height: 2px;
+}
 
 header {
     display: flex;
@@ -17,13 +32,12 @@ header {
     width: 100%;
     top: 0;
     left: 0;
-    transition: linear 0.2s;
-    z-index: 1;
+    transition: linear 0.1s;
+    z-index: 10;
 }
 
 .scrolled {
     background-color: #292A2D;
-    /* TODO: Deviendra un canva apres */
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 1);
     -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 1);
     -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 1);
@@ -73,10 +87,7 @@ footer {
     justify-content: space-evenly;
     background-color: #202124;
     position: relative;
-    width: 100%;
-    bottom: -8px;
-    left: -8px;
-    padding: 15px 8px;
+    padding: 20px 0;
 }
 
 .footer_list {
@@ -93,16 +104,22 @@ footer {
 
 /* Main */
 #top {
-    margin-top: -8px;
+    display: flex;
+    flex-direction: column;
 }
+
+.title {
+    text-align: center;
+    font-size: 2.5em;
+    margin: 0;
+    padding: 25px 0;
+}
+
+/* Summary */
 
 #photo {
     visibility: hidden;
     animation: forwards rotateToAppear 1.5s 2s;
-}
-
-h1 {
-    text-align: center;
 }
 
 #summary {
@@ -157,17 +174,98 @@ h1 {
     opacity: 0.8;
 }
 
+/* Contact */
+
+#formulaire {
+    background-color: #424242;
+    padding: 30px 0;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: auto;
+}
+
+.input {
+    width: 30vw;
+    min-width: 200px;
+    height: 30px;
+    border: 2px solid #252525;
+    border-radius: 8px;
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgba(200, 200, 200, 1);
+    padding: 0;
+    padding-left: 5px;
+    font-size: 15px;
+}
+
+.input:invalid{
+    border-color: rgba(197, 70, 70, 0.7);
+}
+
+.input:valid{
+    border-color: rgba(70, 197, 123, 0.7);   
+}
+
+.input:focus {
+    outline: none;
+}
+
+::placeholder {
+    color: rgba(200, 200, 200, 1);
+}
+
+:-ms-input-placeholder {
+    color: rgba(200, 200, 200, 1);
+}
+
+::-ms-input-placeholder  {
+    color: rgba(200, 200, 200, 1);
+}
+
+#form_content {
+    resize: none;
+    height: 10vh;
+    padding-top: 8px;
+    font-size: 14px;
+}
+
+#submit {
+    width: calc(30vw + 11px);
+    border-color: #252525;
+}
+
+label {
+    position: absolute;
+    padding: 7px;
+    margin-top: 12px;
+    font-size: 15px;
+    opacity: 0;
+    display: none;
+}
+
+.active_label {
+    animation: labelAppears 0.7s forwards;
+}
+
+.hidden_label {
+    animation: labelDisappears 0.7s forwards;
+}
+
 /* Other */
 
 a {
-    color: rgb(108, 178, 236);
+    color: rgb(70, 197, 123);
     text-decoration: none;
 }
 
 canvas {
     position: fixed;
-    left:0;
-    top:0;
+    left: 0;
+    top: 0;
     z-index: -1;
 }
 
@@ -177,11 +275,11 @@ canvas {
     0% {
         transform: translateX(-200%);
     }
-    
+
     50% {
         transform: translateX(10%);
     }
-    
+
     100% {
         transform: translateX(0);
         visibility: visible;
@@ -192,7 +290,7 @@ canvas {
     0% {
         transform: translateX(200%);
     }
-    
+
     50% {
         transform: translateX(-10%);
     }
@@ -207,9 +305,42 @@ canvas {
     0% {
         transform: scale(0%) rotate(0deg);
     }
-    
+
     100% {
         visibility: visible;
         transform: scale(100%) rotate(360deg);
     }
 }
+
+@keyframes labelAppears {
+    0% {
+        transform: translate(0);
+    }
+    
+    50%{
+        transform: translate(-130%);
+    }
+    
+    100% {
+        transform: translate(-110%);
+        opacity: 1;
+    }
+}
+
+@keyframes labelDisappears {
+    
+    0% {
+        transform: translate(-110%);
+        opacity: 1;
+    }
+    
+    30%{
+        transform: translate(-130%);
+    }
+    
+    100% {
+        opacity: 0;
+        transform: translate(0);
+    }
+}
+

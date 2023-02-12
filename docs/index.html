@@ -24,6 +24,7 @@
                 <li class="inside_link_item"><a class="inside_link" href="#contact">Contact</a></li>
             </ul>
         </nav>
+        <div id="test"></div>
     </header>
 
     <main id="top">
@@ -42,13 +43,21 @@
             </div>
         </section>
         <section id="about">
-            <h1>About</h1>
+            <h1 class="title">About</h1>
         </section>
         <section id="portfolio">
-            <h1>Portfolio</h1>
+            <h1 class="title">Portfolio</h1>
         </section>
         <section id="contact">
-            <h1>Contact</h1>
+            <h1 class="title">Contact</h1>
+            <div id=formulaire>
+                <form id="form" method="post" enctype="text/plain" action="mailto:loganwi322@gmail.com?subject=Email sent via the portfolio">
+                    <div class="form_component"><label for="form_name">Name</label><input class="input" id="form_name" type="text" required placeholder="Name" name="name"></div>
+                    <div class="form_component"><label for="form_email">Email</label><input class="input" id="form_email" type="email" required placeholder="Email" name="email"></div>
+                    <div class="form_component"><label for="form_content">Your Message</label><textarea class="input" id="form_content" placeholder="Your Message" required maxlength="2000" minlength="20" name="content" spellcheck="true"></textarea></div>
+                    <div class="form_component"><input id="submit" class="input" type="submit" required value="Send"></div>
+                </form>
+            </div>
         </section>
     </main>
 
