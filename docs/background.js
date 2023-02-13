@@ -3,7 +3,7 @@ const canvas = document.getElementsByTagName("canvas")[0];
 const ctx = canvas.getContext("2d");
 
 const particle_array = [];
-const NB_PARTICLES = Math.round(window.innerWidth * window.innerHeight / 15000);
+const NB_PARTICLES = Math.round(window.innerWidth * window.innerHeight / 10000);
 const DIST_LINK = 90;
 
 let color_mode = 0; // 0 = colorless, 1 = colorful
@@ -32,7 +32,7 @@ class Particle {
             this.#color = randomColor();
             this.#mode = 0;
         }
-        else if (gravity_mode){
+        else if (gravity_mode) {
             if (Math.random() <= 0.5) {
                 this.modeRepulsive();
             }
@@ -224,12 +224,19 @@ function toggleGravity() {
 function keyHandler() {
     let key_pressed = window.event.keyCode;
     let shift_pressed = window.event.shiftKey;
+    console.log(key_pressed)
     if (shift_pressed) {
         if (key_pressed == 13) {
             toggleColor();
         }
         else if (key_pressed == 32) {
             toggleGravity();
+        }
+        else if (key_pressed == 43) {
+            particle_array.push(new Particle(Math.random() * document.documentElement.clientWidth, Math.random() * document.documentElement.clientHeight));
+        }
+        else if (key_pressed == 45) {
+            particle_array.pop();
         }
     }
 }
