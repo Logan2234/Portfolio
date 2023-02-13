@@ -46,7 +46,7 @@ function show_label() {
         if (label) {
             label.classList.remove("active_label");
             label.classList.add("hidden_label");
-            setTimeout(() => { label.style.display = "none"; }, 700)
+            setTimeout(() => { label.style.display = "none"; }, 700);
         }
     }
 }

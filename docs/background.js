@@ -29,6 +29,7 @@ class Particle {
         this.#vx = Math.cos(this.#angle);
         this.#vy = Math.sin(this.#angle);
         if (color_mode) {
+            // eslint-disable-next-line no-undef
             this.#color = randomColor();
             this.#mode = 0;
         }
@@ -54,6 +55,10 @@ class Particle {
         return this.#y;
     }
 
+    getColor() {
+        return this.#color;
+    }
+
     setColor(new_color) {
         this.#color = new_color;
     }
@@ -77,8 +82,6 @@ class Particle {
     modeAttractive() {
         this.#mode = 1;
         this.#color = "rgb(80, 150, 255)";
-        this.#vx = 0;
-        this.#vy = 0;
     }
 
     draw() {
@@ -94,10 +97,21 @@ class Particle {
                 ctx.moveTo(curr_part.#x, curr_part.#y);
                 ctx.lineTo(elt.getX(), elt.getY());
                 let transparence = 1 - dist / DIST_LINK;
-                ctx.strokeStyle = "rgba(100,100,100," + transparence + ")";
+                if (color_mode) {
+                    let rgb_curr = curr_part.getColor().replace("rgb(", "").replace(")", "").split(", ");
+                    let rgb_elt = elt.getColor().replace("rgb(", "").replace(")", "").split(", ");
+                    let res = [];
+                    for (let i = 0; i < 3; i++) {
+                        res.push((parseInt(rgb_curr[i]) + parseInt(rgb_elt[i])) / 2);
+                    }
+                    ctx.strokeStyle = `rgba(${res[0]},${res[1]},${res[2]},${transparence})`;
+                }
+                else {
+                    ctx.strokeStyle = "rgba(100,100,100," + transparence + ")";
+                }
                 ctx.stroke();
             }
-        })
+        });
     }
 
     move() {
@@ -112,7 +126,7 @@ class Particle {
     }
 
     computeGravity() {
-        for (elt of particle_array) {
+        for (let elt of particle_array) {
             if (elt != this) {
                 let dist = distance(this.#x, this.#y, elt.getX(), elt.getY());
                 if (dist <= DIST_LINK) {
@@ -163,9 +177,9 @@ function move() {
 }
 
 function mouse_move() {
-    pos_x = window.event.clientX;
-    pos_y = window.event.clientY;
-    for (elt of particle_array) {
+    let pos_x = window.event.clientX;
+    let pos_y = window.event.clientY;
+    for (let elt of particle_array) {
         let dist = distance(pos_x, pos_y, elt.getX(), elt.getY());
         if (dist <= DIST_LINK * 4 / 3) {
             ctx.moveTo(pos_x, pos_y);
@@ -178,22 +192,25 @@ function mouse_move() {
 }
 
 function mouse_click() {
-    pos_x = window.event.clientX;
-    pos_y = window.event.clientY;
+    let pos_x = window.event.clientX;
+    let pos_y = window.event.clientY;
     particle_array.push(new Particle(pos_x, pos_y));
 }
 
 function toggleColor() {
     if (color_mode) {
-        for (elt of particle_array) {
+        for (let elt of particle_array) {
             elt.setColor("rgb(150, 150, 150)");
         }
         color_mode = 0;
     }
     else {
-        for (elt of particle_array) {
-            elt.resetMode();
-            elt.setColor(randomColor());
+        for (let elt of particle_array) {
+            if (gravity_mode){
+                elt.resetMode();
+            }
+            // eslint-disable-next-line no-undef
+            elt.setColor(randomColor({format: "rgb"}));
         }
         gravity_mode = 0;
         color_mode = 1;
@@ -202,13 +219,13 @@ function toggleColor() {
 
 function toggleGravity() {
     if (gravity_mode) {
-        for (elt of particle_array) {
+        for (let elt of particle_array) {
             elt.resetMode();
         }
         gravity_mode = 0;
     }
     else {
-        for (elt of particle_array) {
+        for (let elt of particle_array) {
             if (Math.random() <= 0.5) {
                 elt.modeRepulsive();
             }
@@ -224,7 +241,6 @@ function toggleGravity() {
 function keyHandler() {
     let key_pressed = window.event.keyCode;
     let shift_pressed = window.event.shiftKey;
-    console.log(key_pressed)
     if (shift_pressed) {
         if (key_pressed == 13) {
             toggleColor();

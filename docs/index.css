@@ -1,14 +1,14 @@
 html {
-    scroll-behavior: smooth;
-    background-color: #292A2D;
-    /* TODO: Deviendra un canva apres */
-    color: white;
     /* TODO: Trouver une meilleure couleur */
+    color: white;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
+
 *{
     font-family: 'Times New Roman', Times, serif;
 }
+
 body {
     margin: 0;
 }
@@ -16,37 +16,35 @@ body {
 /* Header */
 
 #test {
+    background-color: rgb(70, 197, 123);
+    height: 2px;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
-    background-color: rgb(70, 197, 123);
     width: 0;
-    height: 2px;
 }
 
 header {
     display: flex;
-    letter-spacing: 1px;
-    position: fixed;
-    padding-top: 8px;
-    width: 100%;
-    top: 0;
     left: 0;
+    letter-spacing: 1px;
+    padding-top: 8px;
+    position: fixed;
+    top: 0;
     transition: linear 0.1s;
+    width: 100%;
     z-index: 10;
 }
 
 .scrolled {
     background-color: #292A2D;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 1);
-    -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 1);
-    -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 1);
+    box-shadow: 0 1px 5px 0 black;
 }
 
 #nav_links {
     display: flex;
-    padding: 0;
     justify-content: flex-end;
+    padding: 0;
 }
 
 .inside_link_item {
@@ -54,11 +52,11 @@ header {
 }
 
 .inside_link {
-    color: white;
+    border-radius: 3px;
     /* TODO: Trouver une meilleure couleur */
+    color: white;
     padding: 10px 20px;
     transition: cubic-bezier(0.09, 0.79, 0.87, 0.86) 0.3s;
-    border-radius: 3px;
 }
 
 .inside_link_item>.inside_link:hover {
@@ -68,26 +66,26 @@ header {
 }
 
 #my_name {
+    animation: forwards slideInLeft 1.5s;
     flex-grow: 0.85;
     margin-left: 20px;
-    animation: forwards slideInLeft 1.5s;
     visibility: hidden;
 }
 
 #header_nav {
-    flex-grow: 0.15;
     animation: forwards slideInRight 1.5s 1s;
+    flex-grow: 0.15;
     visibility: hidden;
 }
 
 /* Footer */
 
 footer {
+    background-color: #202124;
     display: flex;
     justify-content: space-evenly;
-    background-color: #202124;
-    position: relative;
     padding: 20px 0;
+    position: relative;
 }
 
 .footer_list {
@@ -109,56 +107,56 @@ footer {
 }
 
 .title {
-    text-align: center;
     font-size: 2.5em;
     margin: 0;
     padding: 25px 0;
+    text-align: center;
 }
 
 /* Summary */
 
 #photo {
-    visibility: hidden;
     animation: forwards rotateToAppear 1.5s 2s;
+    visibility: hidden;
 }
 
 #summary {
-    min-height: 100vh;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    min-height: 100vh;
 }
 
 #summary_name {
-    font-size: 4em;
-    text-align: center;
-    margin-block-end: 20px;
-    visibility: hidden;
     animation: forwards slideInLeft 1.5s 2s;
+    font-size: 4em;
+    margin-block-end: 20px;
+    text-align: center;
+    visibility: hidden;
 }
 
 #summary_motto {
-    font-size: 1.8em;
-    text-align: center;
     /* TODO: Bold font moins gras que l'élément du dessus */
-    margin-block: 0;
-    visibility: hidden;
     animation: forwards slideInLeft 1.5s 2s;
+    font-size: 1.8em;
+    margin-block: 0;
+    text-align: center;
+    visibility: hidden;
 }
 
 #social_media {
+    animation: forwards slideInRight 1.5s 2s;
     margin-top: 10px;
-    width: 50%;
     max-width: 400px;
     visibility: hidden;
-    animation: forwards slideInRight 1.5s 2s;
+    width: 50%;
 }
 
 #social_media>ul {
     display: flex;
-    padding: 0;
     justify-content: space-evenly;
+    padding: 0;
 }
 
 .media {
@@ -170,8 +168,8 @@ footer {
 }
 
 .media>a>img:hover {
-    transform: scale(1.3);
     opacity: 0.8;
+    transform: scale(1.3);
 }
 
 /* Contact */
@@ -184,22 +182,22 @@ footer {
 #form {
     display: flex;
     flex-direction: column;
-    width: fit-content;
     margin: auto;
+    width: fit-content;
 }
 
 .input {
-    width: 30vw;
-    min-width: 200px;
-    height: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
     border: 2px solid #252525;
     border-radius: 8px;
+    color: rgb(200, 200, 200);
+    font-size: 15px;
+    height: 30px;
     margin: 10px 0;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: rgba(200, 200, 200, 1);
+    min-width: 200px;
     padding: 0;
     padding-left: 5px;
-    font-size: 15px;
+    width: 30vw;
 }
 
 .input:invalid{
@@ -215,36 +213,28 @@ footer {
 }
 
 ::placeholder {
-    color: rgba(200, 200, 200, 1);
-}
-
-:-ms-input-placeholder {
-    color: rgba(200, 200, 200, 1);
-}
-
-::-ms-input-placeholder  {
-    color: rgba(200, 200, 200, 1);
+    color: rgb(200, 200, 200);
 }
 
 #form_content {
-    resize: none;
+    font-size: 14px;
     height: 10vh;
     padding-top: 8px;
-    font-size: 14px;
+    resize: none;
 }
 
 #submit {
-    width: calc(30vw + 11px);
     border-color: #252525;
+    width: calc(30vw + 11px);
 }
 
 label {
-    position: absolute;
-    padding: 7px;
-    margin-top: 12px;
-    font-size: 15px;
-    opacity: 0;
     display: none;
+    font-size: 15px;
+    margin-top: 12px;
+    opacity: 0;
+    padding: 7px;
+    position: absolute;
 }
 
 .active_label {
@@ -263,8 +253,9 @@ a {
 }
 
 canvas {
-    position: fixed;
+    background-color: #292A2D;
     left: 0;
+    position: fixed;
     top: 0;
     z-index: -1;
 }
@@ -296,19 +287,19 @@ canvas {
     }
 
     100% {
-        visibility: visible;
         transform: translateX(0);
+        visibility: visible;
     }
 }
 
 @keyframes rotateToAppear {
     0% {
-        transform: scale(0%) rotate(0deg);
+        transform: scale(0) rotate(0deg);
     }
 
     100% {
+        transform: scale(1) rotate(360deg);
         visibility: visible;
-        transform: scale(100%) rotate(360deg);
     }
 }
 
@@ -322,16 +313,16 @@ canvas {
     }
     
     100% {
-        transform: translate(-110%);
         opacity: 1;
+        transform: translate(-110%);
     }
 }
 
 @keyframes labelDisappears {
     
     0% {
-        transform: translate(-110%);
         opacity: 1;
+        transform: translate(-110%);
     }
     
     30%{
@@ -343,4 +334,3 @@ canvas {
         transform: translate(0);
     }
 }
-
