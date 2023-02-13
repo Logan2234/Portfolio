@@ -7,7 +7,7 @@ const NB_PARTICLES = Math.round(window.innerWidth * window.innerHeight / 15000);
 const DIST_LINK = 90;
 
 let color_mode = 0; // 0 = colorless, 1 = colorful
-let mode = 0; // 0 = normal, 1 = gravity
+let gravity_mode = 0; // 0 = normal, 1 = gravity
 
 function distance(ax, ay, bx, by) {
     return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
@@ -20,7 +20,7 @@ class Particle {
     #vy;
     #angle;
     #color;
-    #mode; // 0 = normal, 1 = attractive, 2 = repulsive
+    #mode; // 0 = normal, 1 = attractive, -1 = repulsive
 
     constructor(x, y) {
         this.#x = x;
@@ -28,8 +28,22 @@ class Particle {
         this.#angle = Math.random() * Math.PI * 2;
         this.#vx = Math.cos(this.#angle);
         this.#vy = Math.sin(this.#angle);
-        this.#color = "rgb(150,150,150)";
-        this.#mode = 0;
+        if (color_mode) {
+            this.#color = randomColor();
+            this.#mode = 0;
+        }
+        else if (gravity_mode){
+            if (Math.random() <= 0.5) {
+                this.modeRepulsive();
+            }
+            else {
+                this.modeAttractive();
+            }
+        }
+        else {
+            this.#color = "rgb(150,150,150)";
+            this.#mode = 0;
+        }
     }
 
     getX() {
@@ -44,19 +58,27 @@ class Particle {
         this.#color = new_color;
     }
 
+    getMode() {
+        return this.#mode;
+    }
+
     resetMode() {
         this.#mode = 0;
         this.#color = "rgb(150,150,150)";
+        this.#vx = Math.cos(this.#angle);
+        this.#vy = Math.sin(this.#angle);
     }
 
     modeRepulsive() {
-        this.#mode = 2;
-        this.#color = "rgb(200, 0, 0)";
+        this.#mode = -1;
+        this.#color = "rgb(255, 80, 150)";
     }
 
     modeAttractive() {
         this.#mode = 1;
-        this.#color = "rgb(0, 0, 200)";
+        this.#color = "rgb(80, 150, 255)";
+        this.#vx = 0;
+        this.#vy = 0;
     }
 
     draw() {
@@ -88,6 +110,30 @@ class Particle {
             this.#vy = -this.#vy;
         }
     }
+
+    computeGravity() {
+        for (elt of particle_array) {
+            if (elt != this) {
+                let dist = distance(this.#x, this.#y, elt.getX(), elt.getY());
+                if (dist <= DIST_LINK) {
+                    let force = this.#mode * elt.getMode() / dist;
+                    let angle = Math.atan((this.#y - elt.getY()) / (this.#x - elt.getX()));
+                    if (this.#y - elt.getY() <= 0 && this.#x - elt.getX() <= 0) {
+                        this.#vx -= force * Math.cos(angle);
+                        this.#vy -= force * Math.sin(angle);
+                    }
+                    else if (this.#y - elt.getY() >= 0 && this.#x - elt.getX() <= 0) {
+                        this.#vx -= force * Math.cos(angle);
+                        this.#vy -= force * Math.sin(angle);
+                    }
+                    else {
+                        this.#vx += force * Math.cos(angle);
+                        this.#vy += force * Math.sin(angle);
+                    }
+                }
+            }
+        }
+    }
 }
 
 function init() {
@@ -107,8 +153,11 @@ function resize() {
 function move() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let elt of particle_array) {
-        elt.draw();
+        if (gravity_mode) {
+            elt.computeGravity();
+        }
         elt.move();
+        elt.draw();
     }
     setTimeout(move, 20);
 }
@@ -143,19 +192,20 @@ function toggleColor() {
     }
     else {
         for (elt of particle_array) {
+            elt.resetMode();
             elt.setColor(randomColor());
         }
-        mode = 0;
+        gravity_mode = 0;
         color_mode = 1;
     }
 }
 
 function toggleGravity() {
-    if (mode) {
+    if (gravity_mode) {
         for (elt of particle_array) {
             elt.resetMode();
         }
-        mode = 0;
+        gravity_mode = 0;
     }
     else {
         for (elt of particle_array) {
@@ -167,7 +217,7 @@ function toggleGravity() {
             }
         }
         color_mode = 0;
-        mode = 1;
+        gravity_mode = 1;
     }
 }
 
@@ -175,7 +225,6 @@ function keyHandler() {
     let key_pressed = window.event.keyCode;
     let shift_pressed = window.event.shiftKey;
     if (shift_pressed) {
-        console.log(key_pressed);
         if (key_pressed == 13) {
             toggleColor();
         }
