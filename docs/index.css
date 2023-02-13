@@ -5,7 +5,7 @@ html {
     scroll-behavior: smooth;
 }
 
-*{
+* {
     font-family: 'Times New Roman', Times, serif;
 }
 
@@ -33,7 +33,7 @@ header {
     top: 0;
     transition: linear 0.1s;
     width: 100%;
-    z-index: 10;
+    z-index: 1;
 }
 
 .scrolled {
@@ -200,12 +200,12 @@ footer {
     width: 30vw;
 }
 
-.input:invalid{
+.input:invalid {
     border-color: rgba(197, 70, 70, 0.7);
 }
 
-.input:valid{
-    border-color: rgba(70, 197, 123, 0.7);   
+.input:valid {
+    border-color: rgba(70, 197, 123, 0.7);
 }
 
 .input:focus {
@@ -260,6 +260,43 @@ canvas {
     z-index: -1;
 }
 
+#help {
+    display: none;
+    background-color: rgba(50, 50, 50, 0.9);
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+#help_content {
+    background-color: rgb(25, 25, 25);
+    padding: 50px 50px 50px 50px;
+    border-radius: 30px;
+    box-shadow: black 2px 2px 10px 0;
+}
+
+.help_shown {
+    animation: showHelp 0.4s normal;
+}
+
+.help_hidden {
+    animation: hideHelp 0.4s normal;
+}
+
+.command_item {
+    padding: 7px 0;
+}
+
+.key {
+    border-radius: 5px;
+    padding: 4px;
+    border:rgb(70, 70, 70) thin groove;
+}
+
 /* Animations */
 
 @keyframes slideInLeft {
@@ -307,11 +344,11 @@ canvas {
     0% {
         transform: translate(0);
     }
-    
-    50%{
+
+    50% {
         transform: translate(-130%);
     }
-    
+
     100% {
         opacity: 1;
         transform: translate(-110%);
@@ -319,18 +356,48 @@ canvas {
 }
 
 @keyframes labelDisappears {
-    
+
     0% {
         opacity: 1;
         transform: translate(-110%);
     }
-    
-    30%{
+
+    30% {
         transform: translate(-130%);
     }
-    
+
     100% {
         opacity: 0;
         transform: translate(0);
+    }
+}
+
+@keyframes showHelp {
+
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes hideHelp {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(0);
     }
 }

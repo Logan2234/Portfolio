@@ -8,6 +8,7 @@ const DIST_LINK = 90;
 
 let color_mode = 0; // 0 = colorless, 1 = colorful
 let gravity_mode = 0; // 0 = normal, 1 = gravity
+let help_displayed = false;
 
 function distance(ax, ay, bx, by) {
     return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
@@ -132,11 +133,7 @@ class Particle {
                 if (dist <= DIST_LINK) {
                     let force = this.#mode * elt.getMode() / dist;
                     let angle = Math.atan((this.#y - elt.getY()) / (this.#x - elt.getX()));
-                    if (this.#y - elt.getY() <= 0 && this.#x - elt.getX() <= 0) {
-                        this.#vx -= force * Math.cos(angle);
-                        this.#vy -= force * Math.sin(angle);
-                    }
-                    else if (this.#y - elt.getY() >= 0 && this.#x - elt.getX() <= 0) {
+                    if ((this.#y - elt.getY() <= 0 && this.#x - elt.getX() <= 0) || (this.#y - elt.getY() >= 0 && this.#x - elt.getX() <= 0)) {
                         this.#vx -= force * Math.cos(angle);
                         this.#vy -= force * Math.sin(angle);
                     }
@@ -206,11 +203,11 @@ function toggleColor() {
     }
     else {
         for (let elt of particle_array) {
-            if (gravity_mode){
+            if (gravity_mode) {
                 elt.resetMode();
             }
             // eslint-disable-next-line no-undef
-            elt.setColor(randomColor({format: "rgb"}));
+            elt.setColor(randomColor({ format: "rgb" }));
         }
         gravity_mode = 0;
         color_mode = 1;
@@ -242,6 +239,7 @@ function keyHandler() {
     let key_pressed = window.event.keyCode;
     let shift_pressed = window.event.shiftKey;
     if (shift_pressed) {
+        // console.log(key_pressed);
         if (key_pressed == 13) {
             toggleColor();
         }
@@ -253,6 +251,17 @@ function keyHandler() {
         }
         else if (key_pressed == 45) {
             particle_array.pop();
+        }
+        else if (key_pressed == 63) {
+            if (help_displayed) {
+                setTimeout(() => {document.getElementById("help").style.display = "none";}, 400);
+                document.getElementById("help_content").className = "help_hidden";
+            }
+            else {
+                document.getElementById("help").style.display = "flex";
+                document.getElementById("help_content").className = "help_shown";
+            }
+            help_displayed = !help_displayed;
         }
     }
 }
