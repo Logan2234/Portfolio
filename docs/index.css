@@ -28,7 +28,8 @@ header {
     display: flex;
     left: 0;
     letter-spacing: 1px;
-    padding-top: 8px;
+    padding: 17px 0 15px 0;
+    font-size: 1.3em;
     position: fixed;
     top: 0;
     transition: linear 0.1s;
@@ -39,6 +40,8 @@ header {
 .scrolled {
     background-color: #292A2D;
     box-shadow: 0 1px 5px 0 black;
+    padding: 7px 0 5px 0;
+    font-size: 1em;
 }
 
 #nav_links {
