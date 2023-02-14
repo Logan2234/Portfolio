@@ -29,10 +29,10 @@ function scrollFunc() {
     let scrolled = (winScroll / height) * 100;
     if (winScroll >= document.documentElement.clientHeight) {
         document.getElementsByTagName("header")[0].classList.add("scrolled");
-        play_animation = !play_animation;
+        play_animation = false; // Disabling animation for optimization purposes
     } else {
         document.getElementsByTagName("header")[0].classList.remove("scrolled");
-        play_animation = !play_animation;
+        play_animation = true;
     }
     document.getElementById("test").style.width = scrolled + "%";
 }
