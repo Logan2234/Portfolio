@@ -13,7 +13,7 @@ loadColorBounds();
 // check if a range is taken
 var colorRanges = [];
 
-export default function randomColor (options) {
+function randomColor (options) {
 
   options = options || {};
 
