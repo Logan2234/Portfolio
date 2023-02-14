@@ -1,5 +1,28 @@
 {
-  "dependencies": {
-    "randomcolor": "^0.6.2"
+  "name": "logan_portfolio",
+  "version": "1.0.0",
+  "description": "My Portfolio ",
+  "main": "main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Logan2234/my-site.git"
+  },
+  "keywords": [
+    "Portfolio"
+  ],
+  "author": "Logan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Logan2234/my-site/issues"
+  },
+  "homepage": "https://github.com/Logan2234/my-site#readme",
+  "devDependencies": {
+    "eslint": "^8.34.0"
   }
 }

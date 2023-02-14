@@ -1,14 +1,13 @@
+import { randomColor } from "./randomcolor.js";
 
 const canvas = document.getElementsByTagName("canvas")[0];
 const ctx = canvas.getContext("2d");
 
 const particle_array = [];
-const NB_PARTICLES = Math.round(window.innerWidth * window.innerHeight / 10000);
 const DIST_LINK = 90;
 
 let color_mode = 0; // 0 = colorless, 1 = colorful
 let gravity_mode = 0; // 0 = normal, 1 = gravity
-let help_displayed = false;
 
 function distance(ax, ay, bx, by) {
     return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
@@ -31,7 +30,7 @@ class Particle {
         this.#vy = Math.sin(this.#angle);
         if (color_mode) {
             // eslint-disable-next-line no-undef
-            this.#color = randomColor();
+            this.#color = randomColor({ format: "rgb" });
             this.#mode = 0;
         }
         else if (gravity_mode) {
@@ -77,12 +76,12 @@ class Particle {
 
     modeRepulsive() {
         this.#mode = -1;
-        this.#color = "rgb(255, 80, 150)";
+        this.#color = "rgb(255, 120, 120)";
     }
 
     modeAttractive() {
         this.#mode = 1;
-        this.#color = "rgb(80, 150, 255)";
+        this.#color = "rgb(120, 120, 255)";
     }
 
     draw() {
@@ -147,21 +146,22 @@ class Particle {
     }
 }
 
-function init() {
-    resize();
-    // Particles gen
-    for (let i = 0; i < NB_PARTICLES; i++) {
+export function createParticle(nb) {
+    for (let i = 0; i < nb; i++)
         particle_array.push(new Particle(Math.random() * document.documentElement.clientWidth, Math.random() * document.documentElement.clientHeight));
-    }
-    move();
 }
 
-function resize() {
+export function removeParticle(nb) {
+    for (let i = 0; i < nb; i++)
+        particle_array.pop();
+}
+
+export function resize() {
     canvas.width = document.documentElement.clientWidth;
     canvas.height = document.documentElement.clientHeight;
 }
 
-function move() {
+export function move() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let elt of particle_array) {
         if (gravity_mode) {
@@ -170,10 +170,9 @@ function move() {
         elt.move();
         elt.draw();
     }
-    setTimeout(move, 20);
 }
 
-function mouse_move() {
+export function mouse_move() {
     let pos_x = window.event.clientX;
     let pos_y = window.event.clientY;
     for (let elt of particle_array) {
@@ -188,13 +187,13 @@ function mouse_move() {
     }
 }
 
-function mouse_click() {
+export function mouse_click() {
     let pos_x = window.event.clientX;
     let pos_y = window.event.clientY;
     particle_array.push(new Particle(pos_x, pos_y));
 }
 
-function toggleColor() {
+export function toggleColor() {
     if (color_mode) {
         for (let elt of particle_array) {
             elt.setColor("rgb(150, 150, 150)");
@@ -214,7 +213,7 @@ function toggleColor() {
     }
 }
 
-function toggleGravity() {
+export function toggleGravity() {
     if (gravity_mode) {
         for (let elt of particle_array) {
             elt.resetMode();
@@ -234,40 +233,3 @@ function toggleGravity() {
         gravity_mode = 1;
     }
 }
-
-function keyHandler() {
-    let key_pressed = window.event.keyCode;
-    let shift_pressed = window.event.shiftKey;
-    if (shift_pressed) {
-        // console.log(key_pressed);
-        if (key_pressed == 13) {
-            toggleColor();
-        }
-        else if (key_pressed == 32) {
-            toggleGravity();
-        }
-        else if (key_pressed == 43) {
-            particle_array.push(new Particle(Math.random() * document.documentElement.clientWidth, Math.random() * document.documentElement.clientHeight));
-        }
-        else if (key_pressed == 45) {
-            particle_array.pop();
-        }
-        else if (key_pressed == 63) {
-            if (help_displayed) {
-                setTimeout(() => {document.getElementById("help").style.display = "none";}, 400);
-                document.getElementById("help_content").className = "help_hidden";
-            }
-            else {
-                document.getElementById("help").style.display = "flex";
-                document.getElementById("help_content").className = "help_shown";
-            }
-            help_displayed = !help_displayed;
-        }
-    }
-}
-
-window.addEventListener("load", init, false);
-window.addEventListener("resize", resize, false);
-window.addEventListener("mousemove", mouse_move, false);
-window.addEventListener("click", mouse_click, false);
-window.addEventListener("keypress", keyHandler, false);

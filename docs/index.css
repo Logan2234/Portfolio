@@ -3,6 +3,7 @@ html {
     color: white;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
 }
 
 * {
@@ -29,7 +30,7 @@ header {
     left: 0;
     letter-spacing: 1px;
     padding: 17px 0 15px 0;
-    font-size: 1.3em;
+    font-size: 1.2em;
     position: fixed;
     top: 0;
     transition: linear 0.1s;
@@ -58,7 +59,7 @@ header {
     border-radius: 3px;
     /* TODO: Trouver une meilleure couleur */
     color: white;
-    padding: 10px 20px;
+    padding: 10px 2vw;
     transition: cubic-bezier(0.09, 0.79, 0.87, 0.86) 0.3s;
 }
 
@@ -87,8 +88,8 @@ footer {
     background-color: #202124;
     display: flex;
     justify-content: space-evenly;
-    padding: 20px 0;
-    position: relative;
+    padding: 30px 0;
+    scroll-snap-align: center;
 }
 
 .footer_list {
@@ -104,6 +105,7 @@ footer {
 }
 
 /* Main */
+
 #top {
     display: flex;
     flex-direction: column;
@@ -112,9 +114,13 @@ footer {
 .title {
     font-size: 2.5em;
     margin: 0;
-    padding: 25px 0;
+    padding: 100px 0 75px 0;
     text-align: center;
 }
+
+#not_summary {
+    scroll-snap-align: start;
+    background-image: linear-gradient(to top, #202124, #293b49, #1f596b, #007a82, #009b8c, #009c8d, #009d8e, #009e8f, #007f88, #266072, #314351, #292a2d);}
 
 /* Summary */
 
@@ -129,6 +135,7 @@ footer {
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
+    scroll-snap-align: center;
 }
 
 #summary_name {
@@ -175,11 +182,26 @@ footer {
     transform: scale(1.3);
 }
 
+/* About */
+
+#about {
+    height: 100vh;    
+}
+
+/* Portfolio */
+
+#portfolio {
+    height: 100vh;
+}
+
 /* Contact */
 
+#contact {
+    box-shadow: 0 5px 10px 0 #080808;
+}
+
 #formulaire {
-    background-color: #424242;
-    padding: 30px 0;
+    padding-bottom: 70px;
 }
 
 #form {
@@ -187,10 +209,11 @@ footer {
     flex-direction: column;
     margin: auto;
     width: fit-content;
+    align-items: end;
 }
 
 .input {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
     border: 2px solid #252525;
     border-radius: 8px;
     color: rgb(200, 200, 200);
@@ -227,8 +250,12 @@ footer {
 }
 
 #submit {
-    border-color: #252525;
-    width: calc(30vw + 11px);
+    border: #808080 3px outset;
+    width: 15vw;
+}
+
+#submit:active {
+    border-style: inset;
 }
 
 label {
@@ -402,5 +429,17 @@ canvas {
 
     100% {
         transform: scale(0);
+    }
+}
+
+@media screen and (max-width: 500px){
+    footer {
+        flex-direction: column;
+        padding: 30px;
+    }
+
+    .site_map_item{
+        display: inline;
+        margin-right: 4vw;
     }
 }
