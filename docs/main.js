@@ -1,6 +1,9 @@
-import { resize, mouse_move, mouse_click, toggleColor, toggleGravity, move, createParticle, removeParticle } from "./modules/background.js";
+/* eslint-disable indent */
+import { backgroundInit, toggleColor, toggleGravity, move, createParticle, removeParticle } from "./modules/background.js";
+import { cliInit } from "./modules/cli.js";
 
 let help_displayed = false;
+let cli_displayed = false;
 let play_animation = true;
 
 function init() {
@@ -10,9 +13,10 @@ function init() {
         inputs[i].addEventListener("input", show_label, false);
     }
 
-    // Background management
-    resize();
-    createParticle(Math.round(window.innerWidth * window.innerHeight / 10000));
+    cliInit();
+
+    backgroundInit();
+
     main();
 }
 
@@ -67,45 +71,56 @@ function show_label() {
     }
 }
 
-function keyHandler() {
-    let key_pressed = window.event.keyCode;
-    let shift_pressed = window.event.shiftKey;
+function displayHelp() {
+    if (help_displayed) {
+        setTimeout(() => { document.getElementById("help").style.display = "none"; }, 400);
+        document.getElementById("help_content").className = "help_hidden";
+    }
+    else {
+        document.getElementById("help").style.display = "flex";
+        document.getElementById("help_content").className = "help_shown";
+    }
+    help_displayed = !help_displayed;
+}
+
+function displayCLI() {
+    document.getElementById("cli").style.display = (cli_displayed ? "none" : "block");
+    document.getElementById("cli_prompt").focus();
+    cli_displayed = !cli_displayed;
+}
+
+function keyHandler(event) {
+    let key_pressed = event.key;
+    let shift_pressed = event.shiftKey;
 
     if (shift_pressed) {
         switch (key_pressed) {
-        case 67:
-            toggleColor();
-            break;
-        case 71:
-            toggleGravity();
-            break;
-        case 43:
-            createParticle(1);
-            break;
-        case 45:
-            removeParticle(1);
-            break;
-        case 63:
-            if (help_displayed) {
-                setTimeout(() => { document.getElementById("help").style.display = "none"; }, 400);
-                document.getElementById("help_content").className = "help_hidden";
-            }
-            else {
-                document.getElementById("help").style.display = "flex";
-                document.getElementById("help_content").className = "help_shown";
-            }
-            help_displayed = !help_displayed;
-            break;
-        default:
-            console.log(key_pressed);
-            break;
+            case "C":
+                toggleColor();
+                break;
+            case "G":
+                toggleGravity();
+                break;
+            case "+":
+                createParticle(1);
+                break;
+            case "-":
+                removeParticle(1);
+                break;
+            case "?":
+                displayHelp();
+                break;
+            case " ":
+                displayCLI();
+                event.preventDefault();
+                break;
+            default:
+                console.log(key_pressed);
+                break;
         }
     }
 }
 
 window.addEventListener("scroll", scrollFunc, false);
 window.addEventListener("load", init, false);
-window.addEventListener("resize", resize, false);
-window.addEventListener("mousemove", mouse_move, false);
-window.addEventListener("click", mouse_click, false);
 window.addEventListener("keypress", keyHandler, false);

@@ -9,6 +9,15 @@ const DIST_LINK = 90;
 let color_mode = 0; // 0 = colorless, 1 = colorful
 let gravity_mode = 0; // 0 = normal, 1 = gravity
 
+export function backgroundInit() {
+    resize();
+    createParticle(Math.round(window.innerWidth * window.innerHeight / 10000));
+    
+    window.addEventListener("resize", resize, false);
+    window.addEventListener("mousemove", mouse_move, false);
+    window.addEventListener("click", mouse_click, false);
+}
+
 function distance(ax, ay, bx, by) {
     return Math.sqrt(Math.pow(ax - bx, 2) + Math.pow(ay - by, 2));
 }
@@ -172,9 +181,9 @@ export function move() {
     }
 }
 
-export function mouse_move() {
-    let pos_x = window.event.clientX;
-    let pos_y = window.event.clientY;
+export function mouse_move(event) {
+    let pos_x = event.clientX;
+    let pos_y = event.clientY;
     for (let elt of particle_array) {
         let dist = distance(pos_x, pos_y, elt.getX(), elt.getY());
         if (dist <= DIST_LINK * 4 / 3) {
@@ -187,9 +196,9 @@ export function mouse_move() {
     }
 }
 
-export function mouse_click() {
-    let pos_x = window.event.clientX;
-    let pos_y = window.event.clientY;
+export function mouse_click(event) {
+    let pos_x = event.clientX;
+    let pos_y = event.clientY;
     particle_array.push(new Particle(pos_x, pos_y));
 }
 

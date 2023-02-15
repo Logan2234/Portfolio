@@ -120,7 +120,8 @@ footer {
 
 #not_summary {
     scroll-snap-align: start;
-    background-image: linear-gradient(to top, #202124, #293b49, #1f596b, #007a82, #009b8c, #009c8d, #009d8e, #009e8f, #007f88, #266072, #314351, #292a2d);}
+    background-image: linear-gradient(to top, #202124, #293b49, #1f596b, #007a82, #009b8c, #009c8d, #009d8e, #009e8f, #007f88, #266072, #314351, #292a2d);
+}
 
 /* Summary */
 
@@ -185,7 +186,7 @@ footer {
 /* About */
 
 #about {
-    height: 100vh;    
+    height: 100vh;
 }
 
 /* Portfolio */
@@ -324,7 +325,39 @@ canvas {
 .key {
     border-radius: 5px;
     padding: 4px;
-    border:rgb(70, 70, 70) thin groove;
+    border: rgb(70, 70, 70) thin groove;
+}
+
+#cli {
+    display: none;
+    position:fixed;
+    width: 100%;
+    z-index: 2;
+    height: 100%;
+    background-color: rgba(150, 150, 150, 0.3);
+}
+
+#cli_answer {
+    bottom: 28px;
+    margin-left: 2px;
+    padding-left: 2px;
+    position: fixed;
+}
+
+#cli_prompt {
+    bottom: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    background-color: black;
+    color: white;
+    border: white 2px solid;
+    width: 40%;
+    position: fixed;
+}
+
+.cli_answer_text, .cli_answer_text > *{
+    font-family: 'Courier New', Courier, monospace;
+    margin: 2px 0 2px 0;
 }
 
 /* Animations */
@@ -432,13 +465,13 @@ canvas {
     }
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 500px) {
     footer {
         flex-direction: column;
         padding: 30px;
     }
 
-    .site_map_item{
+    .site_map_item {
         display: inline;
         margin-right: 4vw;
     }
