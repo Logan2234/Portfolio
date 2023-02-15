@@ -13,18 +13,19 @@ function init() {
         inputs[i].addEventListener("input", show_label, false);
     }
 
-    cliInit();
-
     backgroundInit();
+
+    cliInit();
 
     main();
 }
 
 // Main loop
 function main() {
-    if (play_animation)
+    if (play_animation) {
         move();
-    setTimeout(main, 20);
+        setTimeout(main, 20);
+    }
 }
 
 function scrollFunc() {
@@ -36,7 +37,10 @@ function scrollFunc() {
         play_animation = false; // Disabling animation for optimization purposes
     } else {
         document.getElementsByTagName("header")[0].classList.remove("scrolled");
-        play_animation = true;
+        if (!play_animation) {
+            play_animation = true;
+            main();
+        }
     }
     document.getElementById("test").style.width = scrolled + "%";
 }
@@ -119,6 +123,16 @@ function keyHandler(event) {
                 break;
         }
     }
+}
+
+export function turnOffBg() {
+    document.getElementsByTagName("canvas")[0].getContext("2d").clearRect(0, 0, 3000, 3000);
+    play_animation = false;
+}
+
+export function turnOnBg() {
+    play_animation = true;
+    main();
 }
 
 window.addEventListener("scroll", scrollFunc, false);

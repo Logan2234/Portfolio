@@ -1,4 +1,5 @@
 /* eslint-disable indent */
+import { turnOffBg, turnOnBg } from "../main.js";
 import { createParticle, removeParticle, toggleColor, toggleGravity } from "./background.js";
 
 const AVAILABLE_COMMANDS = new Map();
@@ -31,6 +32,13 @@ AVAILABLE_COMMANDS.set("color", {
     correctUsage: "Correct usage: color"
 });
 
+AVAILABLE_COMMANDS.set("link", {
+    nb_args: 1,
+    description: "Copy specified link to clipboard",
+    function: link,
+    correctUsage: "Correct usage: link &lt; mail | linkedin | github | facebook | steam &gt;"
+});
+
 AVAILABLE_COMMANDS.set("gravity", {
     nb_args: 0,
     description: "Toggle background gravity mode",
@@ -52,45 +60,71 @@ AVAILABLE_COMMANDS.set("reload", {
     correctUsage: "Correct usage: reload"
 });
 
+AVAILABLE_COMMANDS.set("start", {
+    nb_args: 0,
+    description: "Starts the animation",
+    function: turnOnBg,
+    correctUsage: "Correct usage: start"
+});
+
+AVAILABLE_COMMANDS.set("stop", {
+    nb_args: 0,
+    description: "Stops the animation",
+    function: turnOffBg,
+    correctUsage: "Correct usage: stop"
+});
+
 export function cliInit() {
-    document.getElementById("cli_prompt").addEventListener("keypress", cliKeyPress, false);
+    document.getElementById("cli_prompt").addEventListener("keyup", cliKeyPress, false);
 }
 
 function cliKeyPress(event) {
+    let prompt = document.getElementById("cli_prompt");
     if (event.key == "Enter") {
-        parseCommand();
+        parseCommand(prompt.value);
         document.getElementById("cli_prompt").value = "";
+    }
+    else{
+        let is_valid = false;
+        let full_command = prompt.value.split(" ").filter(elt => elt.length > 0);
+        if (AVAILABLE_COMMANDS.has(full_command[0]) && AVAILABLE_COMMANDS.get(full_command[0]).nb_args == full_command.length - 1)
+            is_valid = !is_valid;
+        prompt.style.color = (is_valid) ? "rgb(70, 197, 123)" : "rgb(197, 70, 70)";
     }
 }
 
-function parseCommand() {
-    let token = document.getElementById("cli_prompt").value.split(" ");
-    if (AVAILABLE_COMMANDS.has(token[0])) {
-        let command = AVAILABLE_COMMANDS.get(token[0]);
-        if (command.nb_args != token.length - 1)
-            manageOutput(command.correctUsage, "red");
+function parseCommand(full_command) {
+    let tokens = full_command.split(" ").filter(elt => elt.length > 0);
+    if (AVAILABLE_COMMANDS.has(tokens[0])) {
+        let command = AVAILABLE_COMMANDS.get(tokens[0]);
+        if (command.nb_args != tokens.length - 1)
+            manageOutput(command.correctUsage, tokens, "red");
         else
-            switch (token.length) {
+            switch (tokens.length) {
                 case 1:
-                    manageOutput(command.function(), "lightgreen");
+                    manageOutput(command.function(), tokens, "lightgreen");
                     break;
                 case 2:
-                    manageOutput(command.function(token[1]), "lightgreen");
+                    manageOutput(command.function(tokens[1]), tokens, "lightgreen");
                     break;
                 default:
-                    manageOutput(command.function(token), "lightgreen");
+                    manageOutput(command.function(tokens), tokens, "lightgreen");
                     break;
             }
     } else {
-        manageOutput("Unknown command", "red");
+        manageOutput("Unknown command", tokens, "red");
     }
 }
 
-function manageOutput(command_output, color) {
+function manageOutput(command_output, tokens, color) {
     let new_p = document.createElement("p");
     new_p.className = "cli_answer_text";
     if (command_output == null)
         new_p.innerHTML = "Command successfully executed";
+    else if (command_output == "Correct usage") {
+        new_p.innerHTML = AVAILABLE_COMMANDS.get(tokens[0]).correctUsage;
+        color = "red";
+    }
     else
         new_p.innerHTML = command_output;
     new_p.style.color = color;
@@ -115,6 +149,29 @@ function help() {
     }
     string += "<br>==================================</p>";
     return string;
+}
+
+function link(media) {
+    switch (media) {
+        case "mail":
+            navigator.clipboard.writeText("loganwi322@gmail.com");
+            break;
+        case "linkedin":
+            navigator.clipboard.writeText("https://www.linkedin.com/in/logan-willem/");
+            break;
+        case "github":
+            navigator.clipboard.writeText("https://github.com/Logan2234/");
+            break;
+        case "facebook":
+            navigator.clipboard.writeText("https://www.facebook.com/logan.wi322/");
+            break;
+        case "steam":
+            navigator.clipboard.writeText("https://steamcommunity.com/id/logan2234/");
+            break;
+        default:
+            return "Correct usage";
+    }
+    return "Link successfully copied to clipboard";
 }
 
 function reload() {

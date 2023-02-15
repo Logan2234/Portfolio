@@ -156,11 +156,15 @@ class Particle {
 }
 
 export function createParticle(nb) {
+    if (isNaN(parseInt(nb)))
+        return "Correct usage";
     for (let i = 0; i < nb; i++)
         particle_array.push(new Particle(Math.random() * document.documentElement.clientWidth, Math.random() * document.documentElement.clientHeight));
 }
 
 export function removeParticle(nb) {
+    if (isNaN(parseInt(nb)))
+        return "Correct usage";
     for (let i = 0; i < nb; i++)
         particle_array.pop();
 }

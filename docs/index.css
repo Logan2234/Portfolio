@@ -11,6 +11,7 @@ html {
 }
 
 body {
+    background-color: #292A2D;
     margin: 0;
 }
 
@@ -353,6 +354,10 @@ canvas {
     border: white 2px solid;
     width: 40%;
     position: fixed;
+}
+
+#cli_prompt:focus{
+    outline: none;
 }
 
 .cli_answer_text, .cli_answer_text > *{
