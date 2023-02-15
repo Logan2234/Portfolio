@@ -83,10 +83,11 @@ export function cliInit() {
 
 function cliKeyPress(event) {
     let prompt = document.getElementById("cli_prompt");
-    console.log(history_num);
-    if (event.key == "Enter") {
+    let tokens = (prompt.value.split(" ").filter(elt => elt.length > 0));
+    // console.log(event.key);
+    if (event.key == "Enter" && tokens[0] !== undefined) {
         history.push(prompt.value);
-        parseCommand(prompt.value);
+        parseCommand(tokens);
         document.getElementById("cli_prompt").value = "";
         history_num = history.length;
     }
@@ -116,8 +117,7 @@ function cliKeyPress(event) {
     prompt.style.color = (is_valid) ? "rgb(70, 197, 123)" : "rgb(197, 70, 70)";
 }
 
-function parseCommand(full_command) {
-    let tokens = full_command.split(" ").filter(elt => elt.length > 0);
+function parseCommand(tokens) {
     if (AVAILABLE_COMMANDS.has(tokens[0])) {
         let command = AVAILABLE_COMMANDS.get(tokens[0]);
         if (command.nb_args != tokens.length - 1)
