@@ -3,6 +3,9 @@ import { turnOffBg, turnOnBg } from "../main.js";
 import { createParticle, removeParticle, toggleColor, toggleGravity } from "./background.js";
 
 const AVAILABLE_COMMANDS = new Map();
+const history = [];
+let history_num;
+let curr_command;
 
 AVAILABLE_COMMANDS.set("add", {
     nb_args: 1,
@@ -80,17 +83,37 @@ export function cliInit() {
 
 function cliKeyPress(event) {
     let prompt = document.getElementById("cli_prompt");
+    console.log(history_num);
     if (event.key == "Enter") {
+        history.push(prompt.value);
         parseCommand(prompt.value);
         document.getElementById("cli_prompt").value = "";
+        history_num = history.length;
     }
-    else{
-        let is_valid = false;
-        let full_command = prompt.value.split(" ").filter(elt => elt.length > 0);
-        if (AVAILABLE_COMMANDS.has(full_command[0]) && AVAILABLE_COMMANDS.get(full_command[0]).nb_args == full_command.length - 1)
-            is_valid = !is_valid;
-        prompt.style.color = (is_valid) ? "rgb(70, 197, 123)" : "rgb(197, 70, 70)";
+    
+    else if (event.key == "ArrowUp" && history_num > 0){
+        history_num--;
+        if (curr_command == null)
+            curr_command = prompt.value;
+        document.getElementById("cli_prompt").value = history[history_num];
     }
+    
+    else if (event.key == "ArrowDown" && history_num < history.length){
+        history_num++;
+        if (history_num == history.length)
+        {
+            document.getElementById("cli_prompt").value = curr_command;
+            curr_command = null;
+        }
+        else 
+            document.getElementById("cli_prompt").value = history[history_num];
+    }
+
+    let is_valid = false;
+    let full_command = prompt.value.split(" ").filter(elt => elt.length > 0);
+    if (AVAILABLE_COMMANDS.has(full_command[0]) && AVAILABLE_COMMANDS.get(full_command[0]).nb_args == full_command.length - 1)
+        is_valid = !is_valid;
+    prompt.style.color = (is_valid) ? "rgb(70, 197, 123)" : "rgb(197, 70, 70)";
 }
 
 function parseCommand(full_command) {
@@ -135,7 +158,7 @@ function manageOutput(command_output, tokens, color) {
 
 function clearCLI() {
     document.getElementById("cli_answer").innerHTML = "";
-    setTimeout(() => { document.getElementById("cli_answer").innerHTML = ""; }, 1000);
+    setTimeout(() => { document.getElementById("cli_answer").innerHTML = ""; }, 1500);
     return "Console cleared";
 }
 

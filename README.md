@@ -7,6 +7,7 @@
 - Complete Portfolio section
 - ~~CLI command color whether the keyword is valid~~ (v0.10)
 - ~~CLI command color whether the number of arguments is valid~~ (v0.10)
+- ~~Navigate through the history~~ (0.11)
 
 ## Reported bug
 
