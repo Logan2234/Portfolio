@@ -9,6 +9,7 @@
 - ~~CLI command color whether the number of arguments is valid~~ (v0.10)
 - ~~Navigate through the history~~ (0.11)
 - Better header (when hovering links)
+- Mobile version
 
 ## Reported bug
 

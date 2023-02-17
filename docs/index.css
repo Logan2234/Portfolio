@@ -1,3 +1,7 @@
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
+
 html {
     /* TODO: Trouver une meilleure couleur */
     color: white;
@@ -6,13 +10,22 @@ html {
     scroll-snap-type: y mandatory;
 }
 
-* {
-    font-family: 'Times New Roman', Times, serif;
-}
-
 body {
     background-color: #292A2D;
     margin: 0;
+}
+
+::selection{
+    background-color:rgb(70, 197, 123);
+}
+
+a::selection{
+    color:white;
+}
+
+a {
+    color: rgb(70, 197, 123);
+    text-decoration: none;
 }
 
 /* Header */
@@ -30,8 +43,8 @@ header {
     display: flex;
     left: 0;
     letter-spacing: 1px;
-    padding: 17px 0 15px 0;
-    font-size: 1.2em;
+    padding: 2px 0 0 0;
+    font-size: 1.1em;
     position: fixed;
     top: 0;
     transition: linear 0.1s;
@@ -42,26 +55,26 @@ header {
 .scrolled {
     background-color: #292A2D;
     box-shadow: 0 1px 5px 0 black;
-    padding: 7px 0 5px 0;
-    font-size: 1em;
 }
 
 #nav_links {
     display: flex;
     justify-content: flex-end;
-    padding: 0;
+    height: 100%;
+    margin: 0;
 }
 
 .inside_link_item {
-    display: inline;
+    display: block;
+    height: 100%;
 }
 
 .inside_link {
-    border-radius: 3px;
     /* TODO: Trouver une meilleure couleur */
     color: white;
-    padding: 10px 2vw;
-    transition: cubic-bezier(0.09, 0.79, 0.87, 0.86) 0.3s;
+    display: block;
+    padding: calc((60.38px - 1.1em) / 2) 2vw;
+    transition: linear 0.2s;
 }
 
 .inside_link_item>.inside_link:hover {
@@ -73,6 +86,7 @@ header {
 #my_name {
     animation: forwards slideInLeft 1.5s;
     flex-grow: 0.85;
+    margin: 0;
     margin-left: 20px;
     visibility: hidden;
 }
@@ -113,9 +127,10 @@ footer {
 }
 
 .title {
-    font-size: 2.5em;
+    font-size: 42px;
     margin: 0;
-    padding: 100px 0 75px 0;
+    margin-top: 64px;
+    padding: 75px 0;
     text-align: center;
 }
 
@@ -188,6 +203,32 @@ footer {
 
 #about {
     height: 100vh;
+}
+
+#about_content {
+    background-color: black;
+    border: white solid 5px;
+    cursor: text;
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    justify-content: center;
+    margin: 0 15vw;
+    padding: 0 20px;
+}
+
+.about_par {
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.about_par::before{
+    content: '> ';
+}
+
+#blinking {
+    animation: blinking 2s steps(1, end);
+    font-weight: bold;
 }
 
 /* Portfolio */
@@ -279,11 +320,6 @@ label {
 
 /* Other */
 
-a {
-    color: rgb(70, 197, 123);
-    text-decoration: none;
-}
-
 canvas {
     background-color: #292A2D;
     left: 0;
@@ -331,7 +367,7 @@ canvas {
 
 #cli {
     display: none;
-    position:fixed;
+    position: fixed;
     width: 100%;
     z-index: 2;
     height: 100%;
@@ -356,11 +392,12 @@ canvas {
     position: fixed;
 }
 
-#cli_prompt:focus{
+#cli_prompt:focus {
     outline: none;
 }
 
-.cli_answer_text, .cli_answer_text > *{
+.cli_answer_text,
+.cli_answer_text>* {
     font-family: 'Courier New', Courier, monospace;
     margin: 2px 0 2px 0;
 }
@@ -469,6 +506,36 @@ canvas {
         transform: scale(0);
     }
 }
+
+
+@keyframes blinking {
+
+    0% {
+        color: black;
+    }
+    
+    20% {
+        color: white;
+    }
+
+    40% {
+        color: black;
+    }
+    
+    60% {
+        color: white;
+    }
+
+    80% {
+        color: black;
+    }
+    
+    100% {
+        color: white;
+    }
+}
+
+
 
 @media screen and (max-width: 500px) {
     footer {
