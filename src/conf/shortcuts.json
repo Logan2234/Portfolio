@@ -1,0 +1,38 @@
+[
+	{
+		"shortcut": "C",
+		"function": "toggleColor",
+		"preventDefault": false,
+		"description": ""
+	},
+	{
+		"shortcut": "G",
+		"function": "toggleGravity",
+		"preventDefault": false,
+		"description": ""
+	},
+	{
+		"shortcut": "+",
+		"function": "createParticle",
+		"preventDefault": false,
+		"description": ""
+	},
+	{
+		"shortcut": "-",
+		"function": "removeParticle",
+		"preventDefault": false,
+		"description": ""
+	},
+	{
+		"shortcut": "?",
+		"function": "displayHelp",
+		"preventDefault": false,
+		"description": ""
+	},
+	{
+		"shortcut": "T",
+		"function": "displayCLI",
+		"preventDefault": true,
+		"description": ""
+	}
+]

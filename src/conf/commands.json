@@ -1,0 +1,74 @@
+[
+	{
+		"command": "add",
+		"nb_args": 1,
+		"function": "createParticle",
+		"returnStringOnSuccess": "Done",
+		"correctUsage": "Correct usage: add &lt;nb&gt;",
+		"description": "Add &lt;nb&gt; particles"
+	},
+	{
+		"command": "remove",
+		"nb_args": 1,
+		"function": "removeParticle",
+		"returnStringOnSuccess": "Done",
+		"correctUsage": "Correct usage: remove &lt;nb&gt;",
+		"description": "Remove &lt;nb&gt; particles"
+	},
+	{
+		"command": "clear",
+		"nb_args": 0,
+		"function": "clearCLI",
+		"returnStringOnSuccess": "Console cleared",
+		"correctUsage": "Correct usage: clear",
+		"description": "Clear the console"
+	},
+	{
+		"command": "color",
+		"nb_args": 0,
+		"function": "toggleColor",
+		"returnStringOnSuccess": "Color toggled",
+		"correctUsage": "Correct usage: color",
+		"description": "Toggle background color mode"
+	},
+	{
+		"command": "link",
+		"nb_args": 1,
+		"function": "link",
+		"returnStringOnSuccess": "Link successfully copied to clipboard",
+		"correctUsage": "Correct usage: link &lt; mail | linkedin | github | facebook | steam &gt;",
+		"description": "Copy specified link to clipboard"
+	},
+	{
+		"command": "gravity",
+		"nb_args": 0,
+		"function": "toggleGravity",
+		"returnStringOnSuccess": "Gravity toggled",
+		"correctUsage": "Correct usage: gravity",
+		"description": "Toggle background gravity mode"
+	},
+	{
+		"command": "help",
+		"nb_args": 0,
+		"function": "help",
+		"returnStringOnSuccess": "",
+		"correctUsage": "Correct usage: help",
+		"description": "Shows available commands"
+	},
+	{
+		"command": "reload",
+		"nb_args": 0,
+		"function": "reload",
+		"returnStringOnSuccess": "Page reloading...",
+		"correctUsage": "Correct usage: reload",
+		"description": "Reloads the page"
+	},
+	{
+		"command": "toggleBackgroundAnimation",
+		"nb_args": 0,
+		"returnStringOnSuccess": "Animation toggled",
+		"function": "toggleBackgroundAnimation",
+		"correctUsage": "Correct usage: toggleBackgroundAnimation",
+		"description": "Toggle background animation"
+	}
+]
