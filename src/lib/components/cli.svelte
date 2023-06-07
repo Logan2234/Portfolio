@@ -15,10 +15,14 @@
 
 	const history: string[] = [];
 	let inputValue = '';
-	let valid = false;
+	$: tokens = inputValue.split(' ').filter((elt) => elt.length > 0);
+	$: command = commands.find((elem) => elem.command == tokens[0]);
+	$: valid = command != undefined && command.nb_args == tokens.length - 1;
 	let answerDiv: Element;
-	let helpString = '';
+	let history_num = 0;
+	let currentCommand = '';
 
+	let helpString = '';
 	onMount(() => {
 		helpString += '<div>';
 		helpString += '<p>=============== List of commands ===============</p><br>';
@@ -41,18 +45,13 @@
 	};
 
 	function cliKeyPress(event: KeyboardEvent) {
-		let history_num = 0;
-		let currentCommand = '';
-		const tokens = inputValue.split(' ').filter((elt) => elt.length > 0);
-		const command: Command | undefined = commands.find((elem) => elem.command == tokens[0]);
-		valid = command != undefined && command.nb_args == tokens.length - 1;
-
 		if (event.key == 'Enter' && tokens[0] !== undefined) {
 			history.push(inputValue);
 			parseCommand(tokens, command);
 			inputValue = '';
 			history_num = history.length;
 		} else if (event.key == 'ArrowUp' && history_num > 0) {
+			console.log('coucou');
 			history_num--;
 			if (currentCommand.length == 0) currentCommand = inputValue;
 			inputValue = history[history_num];

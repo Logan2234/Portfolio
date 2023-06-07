@@ -14,10 +14,10 @@
 		let meta_pressed = event.metaKey;
 
 		const command = shortcuts.find((elem) => elem.shortcut == key_pressed);
-		if (command) {
+		if (command != undefined) {
 			SHORTCUTS_MAPPER[command.function]();
 			if (command.preventDefault) event.preventDefault();
-		} else console.log(key_pressed);
+		}
 	}
 </script>
 
