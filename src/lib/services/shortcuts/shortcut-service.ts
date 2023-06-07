@@ -1,5 +1,4 @@
-import { cli_displayed } from '$lib/stores/shortcut-stores';
-import { help_displayed } from '$lib/stores/stores';
+import { help_displayed, cli_displayed } from '$lib/stores/stores';
 
 export const SHORTCUTS_MAPPER: { [name: string]: () => unknown } = {
 	// "toggleColor": toggleColor,

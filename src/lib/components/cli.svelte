@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { BAD_USAGE, HELP, SUCCESS, UNKNOWN_COMMAND } from '$lib/constants/command_error_code';
+	import { CommandReturnCode } from '$lib/constants/command_return_code';
 	import type { Command } from '$lib/interfaces/command';
 	import { clearCLI, help, link, reload } from '$lib/services/commands/command-service';
 	// import { turnOffBg, turnOnBg } from '../main.js';
 	// import { createParticle, removeParticle, toggleColor, toggleGravity } from './background.js';
 
-	import { cli_displayed } from '$lib/stores/shortcut-stores';
+	import { cli_displayed } from '$lib/stores/stores';
 	import { onMount } from 'svelte';
 	import commands from '../../conf/commands.json';
 
@@ -67,10 +67,11 @@
 
 	function parseCommand(tokens: string[], command: Command | undefined) {
 		if (command != undefined) {
-			if (command.nb_args != tokens.length - 1) manageOutput(command, BAD_USAGE);
+			if (command.nb_args != tokens.length - 1)
+				manageOutput(command, CommandReturnCode.BAD_USAGE);
 			else manageOutput(command, COMMANDS_MAPPER[command.command](tokens));
 		} else {
-			manageOutput(command, UNKNOWN_COMMAND);
+			manageOutput(command, CommandReturnCode.UNKNOWN_COMMAND);
 		}
 	}
 
@@ -80,18 +81,18 @@
 		let color = 'red';
 
 		switch (code) {
-			case HELP:
+			case CommandReturnCode.HELP:
 				string_p = helpString;
 				color = 'lightgreen';
 				break;
-			case SUCCESS:
+			case CommandReturnCode.SUCCESS:
 				string_p = command!.returnStringOnSuccess;
 				color = 'lightgreen';
 				break;
-			case BAD_USAGE:
+			case CommandReturnCode.BAD_USAGE:
 				string_p = command!.correctUsage;
 				break;
-			case UNKNOWN_COMMAND:
+			case CommandReturnCode.UNKNOWN_COMMAND:
 				string_p = 'Unknown command';
 				break;
 			default:

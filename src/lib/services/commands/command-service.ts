@@ -1,9 +1,9 @@
-import { BAD_USAGE, HELP, SUCCESS } from '$lib/constants/command_error_code';
+import { CommandReturnCode } from '$lib/constants/command_return_code';
 
 export function clearCLI(answerDiv: Element): number {
 	answerDiv.innerHTML = '';
 	setTimeout(() => (answerDiv.innerHTML = ''), 1500);
-	return SUCCESS;
+	return CommandReturnCode.SUCCESS;
 }
 
 export function link(media: string): number {
@@ -24,16 +24,16 @@ export function link(media: string): number {
 			navigator.clipboard.writeText('https://steamcommunity.com/id/logan2234/');
 			break;
 		default:
-			return BAD_USAGE;
+			return CommandReturnCode.BAD_USAGE;
 	}
-	return SUCCESS;
+	return CommandReturnCode.SUCCESS;
 }
 
 export function help(): number {
-	return HELP;
+	return CommandReturnCode.HELP;
 }
 
 export function reload(): number {
 	location.reload();
-	return SUCCESS;
+	return CommandReturnCode.SUCCESS;
 }
