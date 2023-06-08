@@ -48,4 +48,16 @@
 	.footer_item {
 		display: block;
 	}
+
+	@media screen and (max-width: 500px) {
+		footer {
+			flex-direction: column;
+			padding: 30px;
+		}
+
+		.site_map_item {
+			display: inline;
+			margin-right: 4vw;
+		}
+	}
 </style>

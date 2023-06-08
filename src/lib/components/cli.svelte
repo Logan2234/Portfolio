@@ -4,7 +4,7 @@
 	import { clearCLI } from '$lib/services/command-service';
 	import { cliDisplayed } from '$lib/stores/stores';
 	import { onMount } from 'svelte';
-	import commands from '../../conf/commands.json';
+	import commands from '$lib/conf/commands.json';
 	import { RED } from '$lib/constants/color';
 
 	let displayCLI: boolean;
