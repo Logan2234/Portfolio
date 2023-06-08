@@ -5,12 +5,16 @@
 		DIST_LINK,
 		ParticleAnimationMode
 	} from '$lib/constants/background';
+	import { createParticle, removeParticle } from '$lib/services/particles/particle-service';
+	import { SHORTCUTS_MAPPER } from '$lib/stores/stores';
 	import { distanceWithCoord } from '$lib/utils/math';
 	import { onMount } from 'svelte';
 
 	// import { randomColor } from './randomcolor.js';
 
-	const particle_array: Particle[] = [];
+	let shortcuts = SHORTCUTS_MAPPER;
+
+	const particles: Particle[] = [];
 
 	let documentWidth: number;
 	let documentHeight: number;
@@ -21,41 +25,42 @@
 	let particleMode = ParticleAnimationMode.NONE;
 
 	onMount(() => {
+		SHORTCUTS_MAPPER.subscribe((value) =>
+			SHORTCUTS_MAPPER.set(
+				value +
+					{
+						createParticle: (_, particles, canvasElement) =>
+							createParticle(1, particles, canvasElement),
+						removeParticle: (_, particles) => removeParticle(1, particles)
+					}
+			)
+		);
+
 		canvasContext = canvasElement.getContext('2d')!;
 		setTimeout(() => {
-			createParticle(Math.round((canvasElement.width * canvasElement.height) / 10000));
+			createParticle(
+				Math.round((canvasElement.width * canvasElement.height) / 10000),
+				particles,
+				canvasElement
+			);
 			move();
 		}, 1);
 	});
 
-	function createParticle(nb: number): void {
-		for (let i = 0; i < nb; i++)
-			particle_array.push(
-				new Particle(
-					Math.random() * canvasElement.width,
-					Math.random() * canvasElement.height
-				)
-			);
-	}
-
-	function removeParticle(nb: number): void {
-		for (let i = 0; i < nb; i++) particle_array.pop();
-	}
-
 	function move(): void {
 		console.log('move');
 		canvasContext.clearRect(0, 0, canvasElement.width, canvasElement.height);
-		for (const elt of particle_array) {
-			if (particleMode) elt.computeGravity(particle_array);
+		for (const elt of particles) {
+			if (particleMode) elt.computeGravity(particles);
 
 			elt.move(canvasElement.width, canvasElement.height);
-			elt.draw(canvasContext, particle_array, particleMode);
+			elt.draw(canvasContext, particles, particleMode);
 		}
 		setTimeout(move, 0.05);
 	}
 
 	function mouseMove(event: MouseEvent): void {
-		for (const elt of particle_array) {
+		for (const elt of particles) {
 			const dist = distanceWithCoord(event.x, event.y, elt.getX, elt.getY);
 			if (dist <= DIST_LINK) {
 				canvasContext.moveTo(event.x, event.y);
@@ -73,7 +78,7 @@
 		// if (event.button == )
 		let pos_x = event.x;
 		let pos_y = event.y;
-		particle_array.push(new Particle(pos_x, pos_y));
+		particles.push(new Particle(pos_x, pos_y));
 	}
 
 	// function toggleColor() {

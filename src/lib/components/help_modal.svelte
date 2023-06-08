@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { help_displayed } from '$lib/stores/stores';
+	import { helpDisplayed } from '$lib/stores/stores';
 
 	let displayHelp = true;
 	let timeoutReached = true;
@@ -15,7 +15,7 @@
 		else timeoutReached = !timeoutReached;
 	}
 
-	help_displayed.subscribe(handleHelpDisplayedChange);
+	helpDisplayed.subscribe(handleHelpDisplayedChange);
 </script>
 
 {#if timeoutReached && helpLoaded}

@@ -5,13 +5,13 @@
 	// import { turnOffBg, turnOnBg } from '../main.js';
 	// import { createParticle, removeParticle, toggleColor, toggleGravity } from './background.js';
 
-	import { cli_displayed } from '$lib/stores/stores';
+	import { cliDisplayed } from '$lib/stores/stores';
 	import { onMount } from 'svelte';
 	import commands from '../../conf/commands.json';
 
 	let displayCLI: boolean;
 
-	cli_displayed.subscribe((value) => (displayCLI = value));
+	cliDisplayed.subscribe((value) => (displayCLI = value));
 
 	const history: string[] = [];
 	let inputValue = '';

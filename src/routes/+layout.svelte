@@ -2,9 +2,11 @@
 	import Footer from '$lib/components/footer.svelte';
 	import Header from '$lib/components/header.svelte';
 	import shortcuts from '../conf/shortcuts.json';
-	import { SHORTCUTS_MAPPER } from '$lib/services/shortcuts/shortcut-service';
 
 	let documentHeight;
+
+	import { SHORTCUTS_MAPPER, cliDisplayed, helpDisplayed } from '$lib/stores/stores';
+	import { createParticle, removeParticle } from '$lib/services/particles/particle-service';
 
 	function keydown(event: any) {
 		let key_pressed = event.key;

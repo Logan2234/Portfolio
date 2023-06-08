@@ -121,7 +121,6 @@
 
 	.title {
 		font-size: 42px;
-		margin: 0;
 		margin-top: 64px;
 		padding: 75px 0;
 		text-align: center;
@@ -165,7 +164,7 @@
 	#summary_name {
 		animation: forwards slideInLeft 1.5s 2s;
 		font-size: 4em;
-		margin-block-end: 20px;
+		margin: 20px 0px;
 		text-align: center;
 		visibility: hidden;
 	}
@@ -174,7 +173,7 @@
 		/* TODO: Bold font moins gras que l'élément du dessus */
 		animation: forwards slideInLeft 1.5s 2s;
 		font-size: 1.8em;
-		margin-block: 0;
+		margin: 0 0 20px 0;
 		text-align: center;
 		visibility: hidden;
 	}
@@ -190,7 +189,6 @@
 	#social_media > ul {
 		display: flex;
 		justify-content: space-evenly;
-		padding: 0;
 	}
 
 	.media {
