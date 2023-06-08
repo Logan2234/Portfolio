@@ -64,11 +64,11 @@
 		"description": "Reloads the page"
 	},
 	{
-		"command": "toggleBackgroundAnimation",
+		"command": "toggleAnimation",
 		"nb_args": 0,
 		"returnStringOnSuccess": "Animation toggled",
-		"function": "toggleBackgroundAnimation",
-		"correctUsage": "Correct usage: toggleBackgroundAnimation",
+		"function": "toggleAnimation",
+		"correctUsage": "Correct usage: toggleAnimation",
 		"description": "Toggle background animation"
 	}
 ]

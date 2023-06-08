@@ -3,6 +3,7 @@ import { DIST_LINK, GravityParticleType, ParticleAnimationMode } from '$lib/cons
 import { distanceWithPoints } from '$lib/utils/math';
 
 export class Particle {
+	static mode = ParticleAnimationMode.NONE;
 	private readonly position: Position;
 	private readonly angle = Math.random() * Math.PI * 2;
 	private vx = Math.cos(this.angle);
@@ -32,6 +33,10 @@ export class Particle {
 
 	public get getColor(): string {
 		return this.color;
+	}
+
+	public set setColor(value: string) {
+		this.color = value;
 	}
 
 	public resetMode(): void {

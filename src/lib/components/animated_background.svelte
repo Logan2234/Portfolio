@@ -1,66 +1,57 @@
 <script lang="ts">
 	import { Particle } from '$lib/classes/particle';
+	import { Particles } from '$lib/classes/particles';
+	import { BackgroundAnimationType, DIST_LINK } from '$lib/constants/background';
+	import { COMMANDS_MAPPER } from '$lib/constants/command';
+	import { SHORTCUTS_MAPPER } from '$lib/constants/shortcut';
 	import {
-		BackgroundAnimationType,
-		DIST_LINK,
-		ParticleAnimationMode
-	} from '$lib/constants/background';
-	import { createParticle, removeParticle } from '$lib/services/particles/particle-service';
-	import { SHORTCUTS_MAPPER } from '$lib/stores/stores';
+		addParticles,
+		removeParticles,
+		toggleColor,
+		toggleGravity
+	} from '$lib/services/command-service';
+	import { backgroundAnimationType } from '$lib/stores/stores';
 	import { distanceWithCoord } from '$lib/utils/math';
 	import { onMount } from 'svelte';
-
-	// import { randomColor } from './randomcolor.js';
-
-	let shortcuts = SHORTCUTS_MAPPER;
-
-	const particles: Particle[] = [];
 
 	let documentWidth: number;
 	let documentHeight: number;
 	let canvasElement: HTMLCanvasElement;
 	let canvasContext: CanvasRenderingContext2D;
 
-	let animationType = BackgroundAnimationType.PARTICLES;
-	let particleMode = ParticleAnimationMode.NONE;
+	let particles = new Particles([]);
 
 	onMount(() => {
-		SHORTCUTS_MAPPER.subscribe((value) =>
-			SHORTCUTS_MAPPER.set(
-				value +
-					{
-						createParticle: (_, particles, canvasElement) =>
-							createParticle(1, particles, canvasElement),
-						removeParticle: (_, particles) => removeParticle(1, particles)
-					}
-			)
-		);
+		// Add shortcuts to shortcut mapper
+		SHORTCUTS_MAPPER.createParticle = () => particles.addParticles(1, canvasElement);
+		SHORTCUTS_MAPPER.removeParticle = () => particles.removeParticles(1);
+		SHORTCUTS_MAPPER.toggleColor = particles.toggleColor;
+		SHORTCUTS_MAPPER.toggleGravity = particles.toggleGravity;
+
+		// Add commands to command mapper
+		COMMANDS_MAPPER.add = (nb) => addParticles(particles, nb, canvasElement);
+		COMMANDS_MAPPER.remove = (nb) => removeParticles(particles, nb);
+		COMMANDS_MAPPER.color = (particles) => toggleColor(particles);
+		COMMANDS_MAPPER.gravity = (particles) => toggleGravity(particles);
 
 		canvasContext = canvasElement.getContext('2d')!;
+
 		setTimeout(() => {
-			createParticle(
+			particles.addParticles(
 				Math.round((canvasElement.width * canvasElement.height) / 10000),
-				particles,
 				canvasElement
 			);
-			move();
+			particles.move(canvasElement, canvasContext);
 		}, 1);
+
+		backgroundAnimationType.subscribe((value) => {
+			if (value === BackgroundAnimationType.PARTICLES)
+				particles.move(canvasElement, canvasContext);
+		});
 	});
 
-	function move(): void {
-		console.log('move');
-		canvasContext.clearRect(0, 0, canvasElement.width, canvasElement.height);
-		for (const elt of particles) {
-			if (particleMode) elt.computeGravity(particles);
-
-			elt.move(canvasElement.width, canvasElement.height);
-			elt.draw(canvasContext, particles, particleMode);
-		}
-		setTimeout(move, 0.05);
-	}
-
 	function mouseMove(event: MouseEvent): void {
-		for (const elt of particles) {
+		for (const elt of particles.getParticles) {
 			const dist = distanceWithCoord(event.x, event.y, elt.getX, elt.getY);
 			if (dist <= DIST_LINK) {
 				canvasContext.moveTo(event.x, event.y);
@@ -73,72 +64,10 @@
 	}
 
 	function mouseClick(event: MouseEvent): void {
-		console.log(event.button);
-		console.log(event.buttons);
-		// if (event.button == )
 		let pos_x = event.x;
 		let pos_y = event.y;
-		particles.push(new Particle(pos_x, pos_y));
+		particles.addParticle(new Particle(pos_x, pos_y));
 	}
-
-	// function toggleColor() {
-	// 	if (color_mode) {
-	// 		for (let elt of particle_array) {
-	// 			elt.setColor('rgb(150, 150, 150)');
-	// 		}
-	// 		color_mode = 0;
-	// 	} else {
-	// 		for (let elt of particle_array) {
-	// 			if (gravity_mode) {
-	// 				elt.resetMode();
-	// 			}
-	// 			// eslint-disable-next-line no-undef
-	// 			elt.setColor(randomColor({ format: 'rgb' }));
-	// 		}
-	// 		gravity_mode = 0;
-	// 		color_mode = 1;
-	// 	}
-	// }
-
-	// export function toggleGravity() {
-	// 	if (gravity_mode) {
-	// 		for (let elt of particle_array) {
-	// 			elt.resetMode();
-	// 		}
-	// 		gravity_mode = 0;
-	// 	} else {
-	// 		for (let elt of particle_array) {
-	// 			if (Math.random() <= 0.5) {
-	// 				elt.modeRepulsive();
-	// 			} else {
-	// 				elt.modeAttractive();
-	// 			}
-	// 		}
-	// 		color_mode = 0;
-	// 		gravity_mode = 1;
-	// 	}
-	// }
-
-	// backgroundInit();
-	// main();
-
-	// // Main loop
-	// function main() {
-	// 	if (play_animation) {
-	// 		move();
-	// 		setTimeout(main, 20);
-	// 	}
-	// }
-
-	// export function turnOffBg() {
-	// 	document.getElementsByTagName('canvas')[0].getContext('2d').clearRect(0, 0, 3000, 3000);
-	// 	play_animation = false;
-	// }
-
-	// export function turnOnBg() {
-	// 	play_animation = true;
-	// 	main();
-	// }
 </script>
 
 <svelte:window bind:innerWidth={documentWidth} bind:innerHeight={documentHeight} />

@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { CommandReturnCode } from '$lib/constants/command_return_code';
+	import { COMMANDS_MAPPER, CommandReturnCode } from '$lib/constants/command';
 	import type { Command } from '$lib/interfaces/command';
-	import { clearCLI, help, link, reload } from '$lib/services/commands/command-service';
-	// import { turnOffBg, turnOnBg } from '../main.js';
-	// import { createParticle, removeParticle, toggleColor, toggleGravity } from './background.js';
-
+	import { clearCLI } from '$lib/services/command-service';
 	import { cliDisplayed } from '$lib/stores/stores';
 	import { onMount } from 'svelte';
 	import commands from '../../conf/commands.json';
+	import { RED } from '$lib/constants/color';
 
 	let displayCLI: boolean;
 
@@ -24,6 +22,10 @@
 
 	let helpString = '';
 	onMount(() => {
+		// Add commands to command_mapper
+		COMMANDS_MAPPER.clear = () => clearCLI(answerDiv);
+
+		// Compute help string
 		helpString += '<div>';
 		helpString += '<p>=============== List of commands ===============</p><br>';
 		for (const entries of commands)
@@ -32,18 +34,6 @@
 		helpString += '<br><p>============================================</p></div>';
 	});
 
-	const COMMANDS_MAPPER: { [name: string]: (...args: any) => number } = {
-		// add: () => createParticle,
-		// remove: () => removeParticle,
-		clear: () => clearCLI(answerDiv),
-		help: help,
-		// color: () => toggleColor,
-		// gravity: () => toggleGravity,
-		link: ([_, media]: [string, string]) => link(media),
-		reload: reload
-		// toggleBackgroundAnimation: () => toggleBackgroundAnimation
-	};
-
 	function cliKeyPress(event: KeyboardEvent) {
 		if (event.key == 'Enter' && tokens[0] !== undefined) {
 			history.push(inputValue);
@@ -51,7 +41,6 @@
 			inputValue = '';
 			history_num = history.length;
 		} else if (event.key == 'ArrowUp' && history_num > 0) {
-			console.log('coucou');
 			history_num--;
 			if (currentCommand.length == 0) currentCommand = inputValue;
 			inputValue = history[history_num];
@@ -77,7 +66,7 @@
 	function manageOutput(command: Command | undefined, code: number) {
 		let new_p = document.createElement('p');
 		let string_p = '';
-		let color = 'red';
+		let color = RED;
 
 		switch (code) {
 			case CommandReturnCode.HELP:

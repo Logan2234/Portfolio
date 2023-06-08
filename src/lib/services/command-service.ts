@@ -1,4 +1,6 @@
-import { CommandReturnCode } from '$lib/constants/command_return_code';
+import type { Particles } from '$lib/classes/particles';
+import { CommandReturnCode } from '$lib/constants/command';
+import { backgroundAnimationType } from '$lib/stores/stores';
 
 export function clearCLI(answerDiv: Element): number {
 	answerDiv.innerHTML = '';
@@ -35,5 +37,34 @@ export function help(): number {
 
 export function reload(): number {
 	location.reload();
+	return CommandReturnCode.SUCCESS;
+}
+
+export function addParticles(
+	particles: Particles,
+	nb: number,
+	canvasElement: HTMLCanvasElement
+): number {
+	particles.addParticles(nb, canvasElement);
+	return CommandReturnCode.SUCCESS;
+}
+
+export function removeParticles(particles: Particles, nb: number): number {
+	particles.removeParticles(nb);
+	return CommandReturnCode.SUCCESS;
+}
+
+export function toggleAnimation(): number {
+	backgroundAnimationType.update((value) => (value = 1 - value)); //! When adding other mode this wont work
+	return CommandReturnCode.SUCCESS;
+}
+
+export function toggleColor(particles: Particles): number {
+	particles.toggleColor();
+	return CommandReturnCode.SUCCESS;
+}
+
+export function toggleGravity(particles: Particles): number {
+	particles.toggleGravity();
 	return CommandReturnCode.SUCCESS;
 }
