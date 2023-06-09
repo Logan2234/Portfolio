@@ -1,34 +1,45 @@
 <script lang="ts">
-	// function find_label(id) {
-	// 	let labels = document.getElementsByTagName('label');
-	// 	for (let label of labels) {
-	// 		if (label.htmlFor == id) {
-	// 			return label;
-	// 		}
-	// 	}
-	// 	return null;
-	// }
+	import { onMount } from 'svelte';
 
-	// function show_label() {
-	// 	let curr_input = document.activeElement;
-	// 	let id = curr_input.id;
-	// 	let label = find_label(id);
-	// 	if (curr_input.value) {
-	// 		if (label) {
-	// 			label.classList.remove('hidden_label');
-	// 			label.classList.add('active_label');
-	// 			label.style.display = 'block';
-	// 		}
-	// 	} else {
-	// 		if (label) {
-	// 			label.classList.remove('active_label');
-	// 			label.classList.add('hidden_label');
-	// 			setTimeout(() => {
-	// 				label.style.display = 'none';
-	// 			}, 700);
-	// 		}
-	// 	}
-	// }
+	let activeInput: HTMLInputElement;
+
+	let labelName: HTMLLabelElement, labelEmail: HTMLLabelElement, labelMessage: HTMLLabelElement;
+	let inputName: HTMLInputElement,
+		inputEmail: HTMLInputElement,
+		inputMessage: HTMLTextAreaElement;
+
+	function handleInput(
+		event: Event & {
+			currentTarget: (EventTarget & HTMLInputElement) | HTMLTextAreaElement;
+		}
+	): void {
+		for (const label of [labelName, labelEmail, labelMessage]) {
+			if (label.htmlFor === event.currentTarget.id) {
+				show_label(label, event.currentTarget);
+			}
+		}
+	}
+
+	function show_label(
+		label: HTMLLabelElement,
+		input: HTMLInputElement | HTMLTextAreaElement
+	): void {
+		if (input.value) {
+			if (label) {
+				label.classList.remove('hidden_label');
+				label.classList.add('active_label');
+				label.style.display = 'block';
+			}
+		} else {
+			if (label) {
+				label.classList.remove('active_label');
+				label.classList.add('hidden_label');
+				setTimeout(() => {
+					label.style.display = 'none';
+				}, 700);
+			}
+		}
+	}
 </script>
 
 <div id="formulaire">
@@ -38,9 +49,11 @@
 		enctype="text/plain"
 		action="mailto:loganwi322@gmail.com?subject=Email sent via the portfolio"
 	>
-		<div class="form_component">
-			<label for="form_name">Name</label>
+		<div class="form-component">
+			<label class="label" for="form_name" bind:this={labelName}>Name</label>
 			<input
+				bind:this={inputName}
+				on:input={(event) => handleInput(event)}
 				class="input"
 				id="form_name"
 				type="text"
@@ -49,8 +62,11 @@
 				name="name"
 			/>
 		</div>
-		<div class="form_component">
-			<label for="form_email">Email</label><input
+		<div class="form-component">
+			<label class="label" for="form_email" bind:this={labelEmail}>Email</label>
+			<input
+				bind:this={inputEmail}
+				on:input={(event) => handleInput(event)}
 				class="input"
 				id="form_email"
 				type="email"
@@ -59,8 +75,11 @@
 				name="email"
 			/>
 		</div>
-		<div class="form_component">
-			<label for="form_content">Your Message</label><textarea
+		<div class="form-component">
+			<label class="label" for="form_content" bind:this={labelMessage}>Your Message</label>
+			<textarea
+				bind:this={inputMessage}
+				on:input={(event) => handleInput(event)}
 				class="input"
 				id="form_content"
 				placeholder="Your Message"
@@ -71,7 +90,7 @@
 				spellcheck="true"
 			/>
 		</div>
-		<div class="form_component">
+		<div>
 			<input id="submit" class="input" type="submit" required value="Send" />
 		</div>
 	</form>
@@ -85,9 +104,15 @@
 	#form {
 		display: flex;
 		flex-direction: column;
+		justify-content: space-between;
+		height: 30vh;
 		margin: auto;
-		width: fit-content;
+		width: max-content;
 		align-items: end;
+	}
+
+	.form-component {
+		display: flex;
 	}
 
 	.input {
@@ -98,9 +123,7 @@
 		color: rgb(200, 200, 200);
 		font-size: 15px;
 		height: 30px;
-		margin: 10px 0;
 		min-width: 200px;
-		padding: 0;
 		padding-left: 5px;
 		width: 30vw;
 	}
@@ -138,19 +161,17 @@
 	}
 
 	label {
-		display: none;
 		font-size: 15px;
-		margin-top: 12px;
+		margin: 9px 0 0 7px;
 		opacity: 0;
-		padding: 7px;
 		position: absolute;
 	}
 
-	.active_label {
+	:global(.active_label) {
 		animation: labelAppears 0.7s forwards;
 	}
 
-	.hidden_label {
+	:global(.hidden_label) {
 		animation: labelDisappears 0.7s forwards;
 	}
 
@@ -160,12 +181,12 @@
 		}
 
 		50% {
-			transform: translate(-130%);
+			transform: translate(-150%);
 		}
 
 		100% {
 			opacity: 1;
-			transform: translate(-110%);
+			transform: translate(-130%);
 		}
 	}
 

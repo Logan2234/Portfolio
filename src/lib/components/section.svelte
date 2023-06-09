@@ -3,7 +3,7 @@
 	export let style = '';
 </script>
 
-<section {style}>
+<section id={title.toLowerCase()} {style}>
 	<h1 class="title">{title}</h1>
 	<slot />
 </section>
