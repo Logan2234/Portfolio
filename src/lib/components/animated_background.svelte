@@ -10,7 +10,7 @@
 		toggleColor,
 		toggleGravity
 	} from '$lib/services/command-service';
-	import { backgroundAnimationType } from '$lib/stores/stores';
+	import { backgroundAnimationType, hasScrolled } from '$lib/stores/stores';
 	import { distanceWithCoord } from '$lib/utils/math';
 	import { onMount } from 'svelte';
 
@@ -49,6 +49,12 @@
 				particles.move(canvasElement, canvasContext);
 		});
 	});
+
+	hasScrolled.subscribe((value) =>
+		backgroundAnimationType.set(
+			value ? BackgroundAnimationType.NONE : BackgroundAnimationType.PARTICLES
+		)
+	);
 
 	function mouseMove(event: MouseEvent): void {
 		for (const elt of particles.getParticles) {

@@ -1,72 +1,13 @@
 <script lang="ts">
-	export let documentHeight: number;
-	let screeSize: number;
-	let scrollY: number;
-	let compactHeader = false;
+	import { documentHeight, hasScrolled, screenSize, scrollY } from '$lib/stores/stores';
 
-	$: height = documentHeight - screeSize;
-	$: scrolled = (scrollY / height) * 100;
-	$: compactHeader = scrollY >= screeSize;
-	/* TODO */
-	// let about_shown = false;
-	// if (winScroll >= document.documentElement.clientHeight) {
-	// 	play_animation = false; // Disabling animation for optimization purposes
-	// 	if (!about_shown) {
-	// 		animateAbout();
-	// 		about_shown = !about_shown;
-	// 	}
-	// } else {
-	// 	if (!play_animation) {
-	// 		play_animation = true;
-	// 		main();
-	// 	}
-	// }
-	// function animateAbout() {
-	// 	function animateString(string, pos = 0) {
-	// 		if (pos == 0) {
-	// 			let new_par = document.createElement('p');
-	// 			new_par.className = 'about_par';
-	// 			new_par.appendChild(document.createTextNode(''));
-	// 			about_content.appendChild(new_par);
-	// 		}
+	let progressBar = 0;
 
-	// 		let texte = about_content.lastChild.textContent;
-	// 		if (pos < string.length) {
-	// 			let wait = 0;
-	// 			if (string[pos] === '/') wait = 160;
-	// 			else
-	// 				about_content.lastChild.textContent =
-	// 					texte.substring(0, texte.length - 1) + string[pos] + '_';
-	// 			setTimeout(() => {
-	// 				animateString(string, pos + 1);
-	// 			}, 30 + wait);
-	// 		} else about_content.lastChild.textContent = texte.substring(0, texte.length - 1); // Removes last "_"
-	// 	}
-
-	// 	// Initial blinking animation
-	// 	let about_content = document.getElementById('about_content');
-	// 	let new_par = document.createElement('p');
-	// 	new_par.className = 'about_par';
-	// 	new_par.innerHTML = '<span id="blinking">_</span>';
-	// 	about_content.appendChild(new_par);
-
-	// 	setTimeout(() => {
-	// 		about_content.removeChild(new_par);
-
-	// 		let string1 =
-	// 			"Hi!// I'm Logan,/ I'm 21 years old and I am in the second year of engineering school.";
-	// 		let string2 = "I study computer science and I'm passionate about programming.";
-
-	// 		animateString(string1);
-	// 		setTimeout(() => animateString(string2), 4000);
-	// 	}, 2000);
-	// }
+	scrollY.subscribe((value) => (progressBar = (value / ($documentHeight - $screenSize)) * 100));
 </script>
 
-<svelte:window bind:innerHeight={screeSize} bind:scrollY />
-
-<header class:scrolled={compactHeader}>
-	<div style:--scroll-ratio={scrolled + '%'} class="progress_bar" />
+<header class:scrolled={$hasScrolled}>
+	<div style:--scroll-ratio={progressBar + '%'} class="progress_bar" />
 	<nav>
 		<ul class="nav_links">
 			<li class="inside_link_item"><a class="inside_link" href="#about">About</a></li>
@@ -82,7 +23,7 @@
 		visibility: hidden;
 		display: flex;
 		position: fixed;
-		transition: linear 0.1s;
+		transition: linear 0.2s;
 		width: 100%;
 		z-index: 1;
 	}

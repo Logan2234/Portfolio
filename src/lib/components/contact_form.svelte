@@ -1,44 +1,17 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	let nameInput: HTMLInputElement;
+	let emailInput: HTMLInputElement;
+	let messageInput: HTMLTextAreaElement;
 
-	let activeInput: HTMLInputElement;
+	let nameValue: string;
+	let emailValue: string;
+	let messageValue: string;
 
-	let labelName: HTMLLabelElement, labelEmail: HTMLLabelElement, labelMessage: HTMLLabelElement;
-	let inputName: HTMLInputElement,
-		inputEmail: HTMLInputElement,
-		inputMessage: HTMLTextAreaElement;
+	let valid = false;
 
-	function handleInput(
-		event: Event & {
-			currentTarget: (EventTarget & HTMLInputElement) | HTMLTextAreaElement;
-		}
-	): void {
-		for (const label of [labelName, labelEmail, labelMessage]) {
-			if (label.htmlFor === event.currentTarget.id) {
-				show_label(label, event.currentTarget);
-			}
-		}
-	}
-
-	function show_label(
-		label: HTMLLabelElement,
-		input: HTMLInputElement | HTMLTextAreaElement
-	): void {
-		if (input.value) {
-			if (label) {
-				label.classList.remove('hidden_label');
-				label.classList.add('active_label');
-				label.style.display = 'block';
-			}
-		} else {
-			if (label) {
-				label.classList.remove('active_label');
-				label.classList.add('hidden_label');
-				setTimeout(() => {
-					label.style.display = 'none';
-				}, 700);
-			}
-		}
+	function handleInput() {
+		valid =
+			nameInput.validity.valid && emailInput.validity.valid && messageInput.validity.valid;
 	}
 </script>
 
@@ -50,10 +23,13 @@
 		action="mailto:loganwi322@gmail.com?subject=Email sent via the portfolio"
 	>
 		<div class="form-component">
-			<label class="label" for="form_name" bind:this={labelName}>Name</label>
+			<label class="label" for="form_name" style:visibility={nameValue ? 'visible' : 'hidden'}
+				>Name
+			</label>
 			<input
-				bind:this={inputName}
-				on:input={(event) => handleInput(event)}
+				bind:value={nameValue}
+				bind:this={nameInput}
+				on:input={handleInput}
 				class="input"
 				id="form_name"
 				type="text"
@@ -63,10 +39,16 @@
 			/>
 		</div>
 		<div class="form-component">
-			<label class="label" for="form_email" bind:this={labelEmail}>Email</label>
+			<label
+				class="label"
+				for="form_email"
+				style:visibility={emailValue ? 'visible' : 'hidden'}
+				>Email
+			</label>
 			<input
-				bind:this={inputEmail}
-				on:input={(event) => handleInput(event)}
+				bind:value={emailValue}
+				bind:this={emailInput}
+				on:input={handleInput}
 				class="input"
 				id="form_email"
 				type="email"
@@ -76,10 +58,16 @@
 			/>
 		</div>
 		<div class="form-component">
-			<label class="label" for="form_content" bind:this={labelMessage}>Your Message</label>
+			<label
+				style:visibility={messageValue ? 'visible' : 'hidden'}
+				class="label"
+				for="form_content"
+				>Your Message
+			</label>
 			<textarea
-				bind:this={inputMessage}
-				on:input={(event) => handleInput(event)}
+				bind:value={messageValue}
+				bind:this={messageInput}
+				on:input={handleInput}
 				class="input"
 				id="form_content"
 				placeholder="Your Message"
@@ -90,9 +78,14 @@
 				spellcheck="true"
 			/>
 		</div>
-		<div>
-			<input id="submit" class="input" type="submit" required value="Send" />
-		</div>
+		<input
+			class="submit"
+			type="submit"
+			value="Send"
+			class:submit-valid={valid}
+			class:submit-invalid={!valid}
+			disabled={!valid}
+		/>
 	</form>
 </div>
 
@@ -105,14 +98,10 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 30vh;
+		height: 33vh;
 		margin: auto;
 		width: max-content;
 		align-items: end;
-	}
-
-	.form-component {
-		display: flex;
 	}
 
 	.input {
@@ -144,6 +133,11 @@
 		color: rgb(200, 200, 200);
 	}
 
+	.form-component {
+		display: flex;
+		flex-direction: column;
+	}
+
 	#form_content {
 		font-size: 14px;
 		height: 10vh;
@@ -151,58 +145,41 @@
 		resize: none;
 	}
 
-	#submit {
-		border: #808080 3px outset;
-		width: 15vw;
+	.submit {
+		align-self: center;
+		padding: 2px 24px;
+		cursor: pointer;
+		margin-top: 10px;
+		height: 40px;
+		color: rgba(200, 200, 200);
+		background-color: rgba(0, 0, 0, 0.2);
+		border-radius: 24px;
 	}
 
-	#submit:active {
-		border-style: inset;
+	.submit-invalid {
+		border: 2px solid rgba(255, 0, 0, 0.5);
+	}
+
+	.submit-invalid:hover {
+		box-shadow: rgba(255, 0, 0, 0.8) 0 0 10px 0;
+	}
+
+	.submit-valid {
+		border: 2px solid var(--primary-color);
+	}
+
+	.submit-valid:hover {
+		box-shadow: var(--primary-color) 0 0 10px 0;
+	}
+
+	.submit:disabled {
+		cursor: not-allowed;
+		color: rgba(200, 200, 200, 0.5);
 	}
 
 	label {
-		font-size: 15px;
-		margin: 9px 0 0 7px;
-		opacity: 0;
-		position: absolute;
-	}
-
-	:global(.active_label) {
-		animation: labelAppears 0.7s forwards;
-	}
-
-	:global(.hidden_label) {
-		animation: labelDisappears 0.7s forwards;
-	}
-
-	@keyframes labelAppears {
-		0% {
-			transform: translate(0);
-		}
-
-		50% {
-			transform: translate(-150%);
-		}
-
-		100% {
-			opacity: 1;
-			transform: translate(-130%);
-		}
-	}
-
-	@keyframes labelDisappears {
-		0% {
-			opacity: 1;
-			transform: translate(-110%);
-		}
-
-		30% {
-			transform: translate(-130%);
-		}
-
-		100% {
-			opacity: 0;
-			transform: translate(0);
-		}
+		align-self: flex-start;
+		margin-left: 5px;
+		transition: linear 0.5s;
 	}
 </style>

@@ -42,7 +42,6 @@
 		display: flex;
 		justify-content: space-evenly;
 		padding: 30px 0;
-		scroll-snap-align: start;
 	}
 
 	.footer_item {

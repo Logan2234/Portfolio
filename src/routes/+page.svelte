@@ -56,7 +56,6 @@
 
 <style>
 	.not_summary {
-		scroll-snap-align: start;
 		background-image: linear-gradient(
 			to top,
 			#202124,

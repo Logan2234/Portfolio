@@ -11,7 +11,7 @@
 <style>
 	.title {
 		font-size: 2.5em;
-		padding: 75px 0;
+		padding: 100px 0 75px 0;
 		text-align: center;
 	}
 </style>
