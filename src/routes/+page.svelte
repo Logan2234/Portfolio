@@ -8,6 +8,7 @@
 	import ContactForm from '$lib/components/contact_form.svelte';
 	import links from '$lib/conf/links.json';
 	import { IMG_PATH } from '$lib/constants/other';
+	import Portfolio from '$lib/components/portfolio.svelte';
 </script>
 
 <AnimatedBackground />
@@ -46,7 +47,7 @@
 			<About />
 		</Section>
 		<Section title="Portfolio">
-			<div />
+			<Portfolio />
 		</Section>
 		<Section title="Contact" style="box-shadow: 0 5px 10px 0 #080808; position:relative">
 			<ContactForm />

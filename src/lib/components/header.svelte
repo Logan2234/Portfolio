@@ -59,6 +59,7 @@
 	.inside_link:hover {
 		background-color: white;
 		color: black;
+		text-decoration: none;
 	}
 
 	.progress_bar {

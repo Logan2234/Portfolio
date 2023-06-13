@@ -11,6 +11,7 @@
 			:root {
 				--main-font: 'Times New Roman', Times, serif;
 				--primary-color: rgb(70, 197, 123);
+				user-select: none;
 			}
 
 			html,
@@ -110,17 +111,13 @@
 				scroll-snap-type: y proximity;
 			}
 
-			::selection {
-				background-color: var(--primary-color);
-			}
-
 			a {
 				color: var(--primary-color);
 				text-decoration: none;
 			}
 
-			a::selection {
-				color: white;
+			a:hover {
+				text-decoration: underline;
 			}
 		</style>
 	</head>
