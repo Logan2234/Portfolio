@@ -25,14 +25,14 @@
 		// Add shortcuts to shortcut mapper
 		SHORTCUTS_MAPPER.createParticle = () => particles.addParticles(1, canvasElement);
 		SHORTCUTS_MAPPER.removeParticle = () => particles.removeParticles(1);
-		SHORTCUTS_MAPPER.toggleColor = particles.toggleColor;
-		SHORTCUTS_MAPPER.toggleGravity = particles.toggleGravity;
+		SHORTCUTS_MAPPER.toggleColor = () => toggleColor(particles);
+		SHORTCUTS_MAPPER.toggleGravity = () => toggleGravity(particles);
 
 		// Add commands to command mapper
 		COMMANDS_MAPPER.add = (nb) => addParticles(particles, nb, canvasElement);
 		COMMANDS_MAPPER.remove = (nb) => removeParticles(particles, nb);
-		COMMANDS_MAPPER.color = (particles) => toggleColor(particles);
-		COMMANDS_MAPPER.gravity = (particles) => toggleGravity(particles);
+		COMMANDS_MAPPER.color = () => toggleColor(particles);
+		COMMANDS_MAPPER.gravity = () => toggleGravity(particles);
 
 		canvasContext = canvasElement.getContext('2d')!;
 

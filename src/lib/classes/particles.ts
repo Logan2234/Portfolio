@@ -3,6 +3,7 @@ import { WHITE } from '$lib/constants/color';
 import { backgroundAnimationType } from '$lib/stores/stores';
 import { get } from 'svelte/store';
 import { Particle } from './particle';
+import { RGBAtoString, randomColor } from '$lib/utils/color';
 
 export class Particles {
 	private particles: Particle[];
@@ -48,16 +49,16 @@ export class Particles {
 
 	public toggleColor(): void {
 		if (Particle.mode === ParticleAnimationMode.COLOR) {
-			Particle.mode = ParticleAnimationMode.NONE;
 			for (const elt of this.particles) {
 				elt.setColor = WHITE;
 			}
+			Particle.mode = ParticleAnimationMode.NONE;
 		} else {
-			Particle.mode = ParticleAnimationMode.COLOR;
 			for (const elt of this.particles) {
-				elt.resetMode();
-				elt.setColor = '#FF0000';
+				if (Particle.mode === ParticleAnimationMode.GRAVITY) elt.resetMode();
+				elt.setColor = RGBAtoString(randomColor());
 			}
+			Particle.mode = ParticleAnimationMode.COLOR;
 		}
 	}
 

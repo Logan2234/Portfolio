@@ -33,6 +33,7 @@
 
 <div bind:clientHeight>
 	<Header />
+	<!-- TODO CHANGE HEADER WITH HOME AND PROJECTS -->
 
 	<slot />
 

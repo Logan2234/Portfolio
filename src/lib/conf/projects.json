@@ -3,24 +3,88 @@
 		"id": 1,
 		"name": "Deca compiler",
 		"img": "",
-		"url": "/deca-compiler",
+		"url": "deca-compiler",
 		"github": "https://github.com/Logan2234/Compilateur-Deca",
-		"description": ""
+		"language": ["Java"],
+		"personalProject": false,
+		"ongoing": false,
+		"description": "TODO: Description"
 	},
 	{
 		"id": 2,
 		"name": "The Werewolves of Miller's Hollow",
-		"img": "",
-		"url": "",
+		"img": "werewolves.jpeg",
+		"url": "werewolves-of-millers-hollow",
 		"github": "",
-		"description": ""
+		"language": ["Javascript"],
+		"personalProject": false,
+		"ongoing": false,
+		"description": "TODO: Description"
 	},
 	{
 		"id": 3,
+		"name": "GUI Library",
+		"img": "",
+		"url": "gui-library",
+		"github": "https://github.com/Logan2234/GUI-Library",
+		"language": ["C"],
+		"personalProject": false,
+		"ongoing": false,
+		"description": "TODO: Description"
+	},
+	{
+		"id": 4,
+		"name": "Blobwar",
+		"img": "",
+		"url": "blobwar",
+		"github": "",
+		"language": ["Rust"],
+		"personalProject": false,
+		"ongoing": false,
+		"description": "TODO: Description"
+	},
+	{
+		"id": 5,
+		"name": "GrenobleEats",
+		"img": "",
+		"url": "grenobleeats",
+		"github": "https://github.com/Logan2234/GrenobleEats",
+		"language": ["SQL", "Java"],
+		"personalProject": false,
+		"ongoing": false,
+		"description": "TODO: Description"
+	},
+	{
+		"id": 6,
+		"name": "Password Generator",
+		"img": "",
+		"url": "password-generator",
+		"github": "https://github.com/Logan2234/password_generator",
+		"language": ["Python"],
+		"personalProject": true,
+		"ongoing": true,
+		"description": "TODO: Description"
+	},
+	{
+		"id": 7,
 		"name": "Portfolio",
 		"img": "",
-		"url": "",
+		"url": "portfolio",
+		"github": "https://github.com/Logan2234/Portfolio",
+		"language": ["TypeScript", "HTML", "CSS"],
+		"personalProject": true,
+		"ongoing": true,
+		"description": "TODO: Description"
+	},
+	{
+		"id": 8,
+		"name": "Solar System Simulation",
+		"img": "",
+		"url": "solar-system-simulation",
 		"github": "",
-		"description": ""
+		"language": ["Rust"],
+		"personalProject": true,
+		"ongoing": true,
+		"description": "TODO: Description"
 	}
 ]
