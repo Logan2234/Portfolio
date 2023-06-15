@@ -3,13 +3,21 @@
 		"id": 1,
 		"name": "Deca compiler",
 		"img": "",
-		"url": "",
-		"github": "",
+		"url": "/deca-compiler",
+		"github": "https://github.com/Logan2234/Compilateur-Deca",
 		"description": ""
 	},
 	{
 		"id": 2,
 		"name": "The Werewolves of Miller's Hollow",
+		"img": "",
+		"url": "",
+		"github": "",
+		"description": ""
+	},
+	{
+		"id": 3,
+		"name": "Portfolio",
 		"img": "",
 		"url": "",
 		"github": "",

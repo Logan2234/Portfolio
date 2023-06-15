@@ -1,14 +1,20 @@
 <script lang="ts">
 	import projects from '$lib/conf/projects.json';
+	import defaultImage from '$lib/assets/images/default-image-placeholder.png';
 </script>
 
 <div class="portfolio-container">
 	{#each projects as project}
-		<div class={'project ' + (project.id % 2 ? 'project-impair' : 'project-pair')}>
-			{project.name}
-		</div>
-		<div class={'project ' + (project.id % 2 ? 'project-impair' : 'project-pair')}>
-			{project.name}
+		<div class="project-wrapper">
+			<div class={'project ' + (project.id % 2 ? 'project-impair' : 'project-pair')}>
+				<!-- TODO defualt image -->
+				<img
+					class="project-image"
+					src={project.img != '' ? project.img : ''}
+					alt="Project graphic"
+				/>
+				Github:&nbsp;<a href={project.github}>{project.name}</a>
+			</div>
 		</div>
 	{/each}
 </div>
@@ -18,7 +24,16 @@
 		height: 100vh;
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: space-evenly;
+		gap: 5%;
+		margin: auto;
+		max-width: 75%;
+	}
+
+	.project-wrapper {
+		align-items: center;
+		display: flex;
+		flex: 1 0 34%;
+		justify-content: center;
 	}
 
 	.project:hover {
@@ -42,12 +57,11 @@
 		color: black;
 		cursor: pointer;
 		display: flex;
-		height: 300px;
-		min-width: 300px;
+		height: 400px;
+		min-width: 400px;
 		padding: 10px;
 		align-items: center;
 		justify-content: center;
 		transition: linear 0.1s;
-		width: 25%;
 	}
 </style>
