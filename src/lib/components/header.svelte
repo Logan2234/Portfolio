@@ -10,9 +10,8 @@
 	<div style:--scroll-ratio={progressBar + '%'} class="progress_bar" />
 	<nav>
 		<ul class="nav_links">
-			<li class="inside_link_item"><a class="inside_link" href="#about">About</a></li>
-			<li class="inside_link_item"><a class="inside_link" href="#portfolio">Portfolio</a></li>
-			<li class="inside_link_item"><a class="inside_link" href="#contact">Contact</a></li>
+			<li class="inside_link_item"><a class="inside_link" href="/">Home</a></li>
+			<li class="inside_link_item"><a class="inside_link" href="/projects">Projects</a></li>
 		</ul>
 	</nav>
 </header>
@@ -20,10 +19,12 @@
 <style>
 	header {
 		animation: forwards slideBottomTotop 1.5s 1s;
-		visibility: hidden;
 		display: flex;
-		position: fixed;
+		height: 5%;
+		position: sticky;
 		transition: linear 0.2s;
+		top: 0;
+		visibility: hidden;
 		width: 100%;
 		z-index: 1;
 	}

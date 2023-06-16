@@ -108,7 +108,6 @@
 				color: white;
 				overflow-x: hidden;
 				scroll-behavior: smooth;
-				scroll-snap-type: y proximity;
 			}
 
 			a {
@@ -119,9 +118,13 @@
 			a:hover {
 				text-decoration: underline;
 			}
+
+			.page {
+				display: contents;
+			}
 		</style>
 	</head>
 	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
+		%sveltekit.body%
 	</body>
 </html>

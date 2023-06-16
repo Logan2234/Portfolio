@@ -1,5 +1,4 @@
 <script>
-	import favicon from '$lib/assets/images/favicon.png';
 	import AnimatedBackground from '$lib/components/animated_background.svelte';
 	import HelpModal from '$lib/components/help_modal.svelte';
 	import Cli from '$lib/components/cli.svelte';
@@ -20,7 +19,7 @@
 <main>
 	<section class="summary">
 		<!-- TODO -->
-		<img src={favicon} id="photo" title="Press Shift + , ;)" alt="Logo" />
+		<img src={IMG_PATH + 'favicon.png'} id="photo" title="Press Shift + , ;)" alt="Logo" />
 		<h1 id="summary_name">Logan Willem</h1>
 		<h3 id="summary_motto">[MOTTO]</h3>
 		<div id="social_media">
@@ -81,7 +80,6 @@
 		flex-direction: column;
 		justify-content: center;
 		height: 100vh;
-		scroll-snap-align: center;
 		text-align: center;
 		visibility: hidden;
 	}

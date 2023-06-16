@@ -20,7 +20,7 @@
 	let canvasContext: CanvasRenderingContext2D;
 
 	let particles = new Particles([]);
-
+	// TODO: Add a onDestroy parce que sinon en changeant de page on obtient du lag (particules toujours en vie)
 	onMount(() => {
 		// Add shortcuts to shortcut mapper
 		SHORTCUTS_MAPPER.createParticle = () => particles.addParticles(1, canvasElement);

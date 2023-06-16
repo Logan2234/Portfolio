@@ -56,6 +56,17 @@
 	},
 	{
 		"id": 6,
+		"name": "Volcano",
+		"img": "",
+		"url": "volcano",
+		"github": "",
+		"language": ["Python", "GLSL"],
+		"personalProject": false,
+		"ongoing": false,
+		"description": "TODO: Description"
+	},
+	{
+		"id": 7,
 		"name": "Password Generator",
 		"img": "",
 		"url": "password-generator",
@@ -66,7 +77,7 @@
 		"description": "TODO: Description"
 	},
 	{
-		"id": 7,
+		"id": 8,
 		"name": "Portfolio",
 		"img": "",
 		"url": "portfolio",
@@ -77,7 +88,7 @@
 		"description": "TODO: Description"
 	},
 	{
-		"id": 8,
+		"id": 9,
 		"name": "Solar System Simulation",
 		"img": "",
 		"url": "solar-system-simulation",

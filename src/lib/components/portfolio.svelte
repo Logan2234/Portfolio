@@ -1,7 +1,7 @@
 <script lang="ts">
 	import projects from '$lib/conf/projects.json';
-	import defaultImage from '$lib/assets/images/default-image-placeholder.png';
 	import { goto } from '$app/navigation';
+	import { IMG_PATH } from '$lib/constants/other';
 
 	function handleClick(url: string): void {
 		goto(`project/${url}`);
@@ -19,7 +19,8 @@
 				<!-- TODO defualt image -->
 				<img
 					class="project-image"
-					src={project.img != '' ? '/src/lib/assets/images/' + project.img : defaultImage}
+					src={IMG_PATH +
+						(project.img != '' ? project.img : 'default-image-placeholder.png')}
 					alt="Project graphic"
 				/>
 				<div class="project-info">{project.name}</div>
@@ -64,16 +65,12 @@
 	}
 
 	.project-info {
-		display: flex;
 		align-items: center;
+		display: flex;
 		justify-content: center;
-		padding: 50px;
-		width: 100%;
-		height: 100%;
 		position: absolute;
 		visibility: hidden;
 	}
-
 	.project-image {
 		height: 100%;
 		width: 100%;

@@ -29,9 +29,8 @@
 	<div>
 		<h3>Site Map</h3>
 		<ul>
-			<li class="footer_item site_map_item"><a href="#about">About</a></li>
-			<li class="footer_item site_map_item"><a href="#portfolio">Portfolio</a></li>
-			<li class="footer_item site_map_item"><a href="#contact">Contact</a></li>
+			<li class="footer_item site_map_item"><a href="/">Home</a></li>
+			<li class="footer_item site_map_item"><a href="/projects">Projects</a></li>
 		</ul>
 	</div>
 </footer>

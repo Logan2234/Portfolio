@@ -31,7 +31,7 @@
 
 <svelte:window on:keydown={keydown} bind:innerHeight bind:scrollY on:scroll={handleScroll} />
 
-<div bind:clientHeight>
+<div class="page" bind:clientHeight>
 	<Header />
 	<!-- TODO CHANGE HEADER WITH HOME AND PROJECTS -->
 
@@ -39,3 +39,14 @@
 
 	<Footer />
 </div>
+
+<style>
+	.page {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		min-height: 100%;
+		min-width: 100%;
+		position: absolute;
+	}
+</style>
