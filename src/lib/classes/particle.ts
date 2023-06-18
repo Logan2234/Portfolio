@@ -69,7 +69,7 @@ export class Particle {
 
 		particle_array.forEach((elt) => {
 			const dist = distanceWithPoints(this.position, elt.getPos);
-			if (this !== elt && dist <= DIST_LINK) {
+			if (this !== elt && dist <= DIST_LINK + 30) {
 				const transparence = 1 - dist / DIST_LINK;
 				canvasContext.moveTo(this.getX, this.getY);
 				canvasContext.lineTo(elt.getX, elt.getY);

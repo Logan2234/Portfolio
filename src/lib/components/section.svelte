@@ -11,6 +11,7 @@
 <style>
 	.section {
 		padding: 25px 0;
+		min-height: 70vh;
 	}
 
 	.title {

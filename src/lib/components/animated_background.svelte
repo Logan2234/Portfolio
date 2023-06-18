@@ -48,13 +48,13 @@
 			if (value === BackgroundAnimationType.PARTICLES)
 				particles.move(canvasElement, canvasContext);
 		});
-	});
 
-	hasScrolled.subscribe((value) =>
-		backgroundAnimationType.set(
-			value ? BackgroundAnimationType.NONE : BackgroundAnimationType.PARTICLES
-		)
-	);
+		hasScrolled.subscribe((value) =>
+			backgroundAnimationType.set(
+				value ? BackgroundAnimationType.NONE : BackgroundAnimationType.PARTICLES
+			)
+		);
+	});
 
 	function mouseMove(event: MouseEvent): void {
 		for (const elt of particles.getParticles) {
@@ -89,5 +89,6 @@
 <style>
 	canvas {
 		position: absolute;
+		z-index: -1;
 	}
 </style>

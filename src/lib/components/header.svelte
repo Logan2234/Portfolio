@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { documentHeight, hasScrolled, screenSize, scrollY } from '$lib/stores/stores';
+	import projects from '$lib/conf/projects.json';
 
 	let progressBar = 0;
 
@@ -7,40 +8,43 @@
 </script>
 
 <header class:scrolled={$hasScrolled}>
-	<div style:--scroll-ratio={progressBar + '%'} class="progress_bar" />
+	<div style:--scroll-ratio={!$scrollY ? '0%' : progressBar + '%'} class="progress_bar" />
 	<nav>
-		<ul class="nav_links">
+		<ul class:margin-top={!$scrollY ? 0 : '2px'} class="nav_links">
 			<li class="inside_link_item"><a class="inside_link" href="/">Home</a></li>
-			<li class="inside_link_item"><a class="inside_link" href="/projects">Projects</a></li>
+			<li class="inside_link_item project-dropdown">
+				<a class="inside_link" href="/projects">Projects</a>
+				<div class="dropdown-menu">
+					{#each projects as project}
+						<a class="dropdown-item" href="/projects/{project.url}">{project.name}</a>
+					{/each}
+				</div>
+			</li>
 		</ul>
 	</nav>
 </header>
 
 <style>
 	header {
-		animation: forwards slideBottomTotop 1.5s 1s;
-		display: flex;
-		height: 5%;
 		position: sticky;
 		transition: linear 0.2s;
 		top: 0;
-		visibility: hidden;
-		width: 100%;
 		z-index: 1;
-	}
-
-	nav {
-		width: 100%;
 	}
 
 	.nav_links {
 		display: flex;
-		margin-top: 2px;
+		justify-content: left;
+	}
+
+	ul {
+		list-style: none;
 	}
 
 	.inside_link_item {
-		display: block;
-		flex-grow: 1;
+		max-width: 150px;
+		width: 15%;
+		min-width: fit-content;
 		text-align: center;
 	}
 
@@ -48,7 +52,7 @@
 		color: white;
 		display: block;
 		font-size: 1.3em;
-		padding: 2vh 2vw;
+		padding: 1.5vh 2vw;
 		transition: linear 0.2s;
 	}
 
@@ -66,22 +70,38 @@
 	.progress_bar {
 		background-color: rgb(70, 197, 123);
 		height: 2px;
-		position: fixed;
+		position: sticky;
+		top: 0;
 		width: var(--scroll-ratio);
 	}
 
-	@keyframes slideBottomTotop {
-		0% {
-			transform: translateY(100vh);
-		}
+	.dropdown-menu {
+		align-items: flex-start;
+		background-color: white;
+		border-radius: 0 12px 12px 12px;
+		display: none;
+		flex-direction: column;
+		position: fixed;
+		visibility: hidden;
+		width: max-content;
+	}
 
-		50% {
-			transform: translateY(-2vh);
-		}
+	.project-dropdown:hover > .dropdown-menu {
+		display: flex;
+		visibility: visible;
+	}
 
-		100% {
-			transform: translateY(0);
-			visibility: visible;
-		}
+	.dropdown-item {
+		color: black;
+		padding: 10px;
+		text-align: left;
+		transition: linear 0.1s;
+		width: 100%;
+	}
+
+	.dropdown-item:hover {
+		background-color: #292a2d;
+		color: white;
+		text-decoration: none;
 	}
 </style>

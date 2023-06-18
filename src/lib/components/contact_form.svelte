@@ -98,7 +98,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 33vh;
+		height: 40vh;
 		margin: auto;
 		width: max-content;
 		align-items: end;
@@ -114,7 +114,7 @@
 		height: 30px;
 		min-width: 200px;
 		padding-left: 5px;
-		width: 30vw;
+		width: 40vw;
 	}
 
 	.input:invalid {
@@ -139,8 +139,7 @@
 	}
 
 	#form_content {
-		font-size: 14px;
-		height: 10vh;
+		height: 13vh;
 		padding-top: 8px;
 		resize: none;
 	}
@@ -149,7 +148,7 @@
 		align-self: center;
 		padding: 2px 24px;
 		cursor: pointer;
-		margin-top: 10px;
+		margin-top: 20px;
 		height: 40px;
 		color: rgba(200, 200, 200);
 		background-color: rgba(0, 0, 0, 0.2);

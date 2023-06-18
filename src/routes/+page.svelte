@@ -6,42 +6,31 @@
 	import About from '$lib/components/about.svelte';
 	import ContactForm from '$lib/components/contact_form.svelte';
 	import links from '$lib/conf/links.json';
-	import { IMG_PATH } from '$lib/constants/other';
 	import Portfolio from '$lib/components/portfolio.svelte';
+	import LinkWithIcon from '$lib/components/link_with_icon.svelte';
 </script>
-
-<AnimatedBackground />
 
 <HelpModal />
 
 <Cli />
 
+<AnimatedBackground />
+
 <main>
 	<section class="summary">
-		<!-- TODO -->
-		<img src={IMG_PATH + 'favicon.png'} id="photo" title="Press Shift + , ;)" alt="Logo" />
 		<h1 id="summary_name">Logan Willem</h1>
-		<h3 id="summary_motto">[MOTTO]</h3>
+		<h3 id="summary_motto">Software Engineer</h3>
 		<div id="social_media">
-			<ul>
-				{#each links as link}
-					<li class="media">
-						<a href={link.href} target="_blank">
-							<img
-								class="media-img"
-								src={IMG_PATH + link.imgSrc}
-								alt={link.imgAlt}
-								height="30px"
-								width="30px"
-							/>
-						</a>
-					</li>
-				{/each}
-			</ul>
+			{#each links as link}
+				<LinkWithIcon href={link.href} icon={link.icon} />
+			{/each}
 		</div>
+		<a class="down" href="#about"
+			><i class="fa fa-angle-double-down fa-3x" aria-hidden="true" />
+		</a>
 	</section>
 
-	<div class="not_summary">
+	<div id="#about">
 		<Section title="About">
 			<About />
 		</Section>
@@ -55,114 +44,55 @@
 </main>
 
 <style>
-	.not_summary {
-		background-image: linear-gradient(
-			to top,
-			#202124,
-			#293b49,
-			#1f596b,
-			#007a82,
-			#009b8c,
-			#009c8d,
-			#009d8e,
-			#009e8f,
-			#007f88,
-			#266072,
-			#314351,
-			#292a2d
-		);
+	.down {
+		color: white;
+		position: absolute;
+		top: 90vh;
+		animation: fly 1.5s infinite;
 	}
 
-	/* Summary */
 	.summary {
 		align-items: center;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		gap: 30px;
 		height: 100vh;
-		text-align: center;
-		visibility: hidden;
-	}
-
-	#photo {
-		animation: forwards rotateToAppear 1.5s 2s;
 	}
 
 	#summary_name {
-		animation: forwards slideInLeft 1.5s 2s;
-		font-size: 4em;
+		font-size: 7em;
 		margin: 20px 0px;
+		font-family: 'Montserrat';
+		text-align: center;
 	}
 
 	#summary_motto {
-		animation: forwards slideInLeft 1.5s 2s;
-		font-size: 1.8em;
+		font-size: 3em;
 		margin: 0 0 30px 0;
+		text-align: center;
 	}
 
 	#social_media {
-		animation: forwards slideInRight 1.5s 2s;
 		max-width: 500px;
 		width: 100%;
 	}
 
-	#social_media > ul {
+	#social_media {
 		display: flex;
 		justify-content: space-evenly;
 	}
 
-	.media {
-		display: inline;
-	}
-
-	.media-img {
-		transition: linear 0.1s;
-	}
-
-	.media-img:hover {
-		opacity: 0.8;
-		transform: scale(1.3);
-	}
-
-	/* Animations */
-	@keyframes slideInLeft {
-		0% {
-			transform: translateX(-200%);
+	@keyframes fly {
+		from,
+		to {
+			opacity: 1;
+			top: 90vh;
 		}
 
 		50% {
-			transform: translateX(10%);
-		}
-
-		100% {
-			transform: translateX(0);
-			visibility: visible;
-		}
-	}
-
-	@keyframes slideInRight {
-		0% {
-			transform: translateX(200%);
-		}
-
-		50% {
-			transform: translateX(-10%);
-		}
-
-		100% {
-			transform: translateX(0);
-			visibility: visible;
-		}
-	}
-
-	@keyframes rotateToAppear {
-		0% {
-			transform: scale(0) rotate(0deg);
-		}
-
-		100% {
-			transform: scale(1) rotate(360deg);
-			visibility: visible;
+			opacity: 0.4;
+			top: 91vh;
 		}
 	}
 </style>

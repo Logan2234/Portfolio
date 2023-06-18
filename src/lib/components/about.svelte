@@ -63,9 +63,9 @@
 	// }
 </script>
 
-<div class="about_content">
+<div class="about-content">
 	{#if $hasScrolled}
-		<div class="about_par" transition:typewriter={{ speed: 2 }}>
+		<div class="about-par" transition:typewriter={{ speed: 2 }}>
 			Hi! I'm Logan, I'm 21 years old and I am in the second year of engineering school. I
 			study computer science and I'm passionate about programming.
 		</div>
@@ -73,7 +73,7 @@
 </div>
 
 <style>
-	.about_content {
+	.about-content {
 		background-color: black;
 		border: white solid 5px;
 		border-radius: 10px;
@@ -86,12 +86,12 @@
 		padding: 0 20px;
 	}
 
-	.about_par {
+	.about-par {
 		font-size: 16px;
 		font-family: 'Courier New', Courier, monospace;
 	}
 
-	.about_par::before {
+	.about-par::before {
 		content: '> ';
 	}
 

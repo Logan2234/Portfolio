@@ -1,6 +1,5 @@
 [
 	{
-		"id": 1,
 		"name": "Deca compiler",
 		"img": "",
 		"url": "deca-compiler",
@@ -11,7 +10,6 @@
 		"description": "TODO: Description"
 	},
 	{
-		"id": 2,
 		"name": "The Werewolves of Miller's Hollow",
 		"img": "werewolves.jpeg",
 		"url": "werewolves-of-millers-hollow",
@@ -19,10 +17,9 @@
 		"language": ["Javascript"],
 		"personalProject": false,
 		"ongoing": false,
-		"description": "TODO: Description"
+		"description": "Lorem Ipsum is simply dummy information regarding the existence of a Lorem Ipsum. Lorem Ipsum is a utility method for maintaining lorem Ipsum. Lorem Ipsum is a utility method for maintaining lorem Ipsum. Lorem Ipsum is a utility method for maintaining lorem Ipsum. Lorem Ipsum is a utility method for maintaining lorem Ipsum. Lore"
 	},
 	{
-		"id": 3,
 		"name": "GUI Library",
 		"img": "",
 		"url": "gui-library",
@@ -33,7 +30,6 @@
 		"description": "TODO: Description"
 	},
 	{
-		"id": 4,
 		"name": "Blobwar",
 		"img": "",
 		"url": "blobwar",
@@ -44,7 +40,6 @@
 		"description": "TODO: Description"
 	},
 	{
-		"id": 5,
 		"name": "GrenobleEats",
 		"img": "",
 		"url": "grenobleeats",
@@ -55,7 +50,6 @@
 		"description": "TODO: Description"
 	},
 	{
-		"id": 6,
 		"name": "Volcano",
 		"img": "",
 		"url": "volcano",
@@ -66,7 +60,6 @@
 		"description": "TODO: Description"
 	},
 	{
-		"id": 7,
 		"name": "Password Generator",
 		"img": "",
 		"url": "password-generator",
@@ -77,7 +70,6 @@
 		"description": "TODO: Description"
 	},
 	{
-		"id": 8,
 		"name": "Portfolio",
 		"img": "",
 		"url": "portfolio",
@@ -88,7 +80,6 @@
 		"description": "TODO: Description"
 	},
 	{
-		"id": 9,
 		"name": "Solar System Simulation",
 		"img": "",
 		"url": "solar-system-simulation",

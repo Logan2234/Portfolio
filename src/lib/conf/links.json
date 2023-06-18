@@ -1,27 +1,27 @@
 [
 	{
 		"href": "mailto:loganwi322@gmail.com",
-		"imgSrc": "gmail.svg",
+		"icon": "fa-envelope",
 		"imgAlt": "Logo Gmail"
 	},
 	{
 		"href": "https://www.linkedin.com/in/logan-willem/",
-		"imgSrc": "linkedin.svg",
+		"icon": "fa-linkedin",
 		"imgAlt": "Logo Linkedin"
 	},
 	{
 		"href": "https://github.com/Logan2234/",
-		"imgSrc": "github.svg",
+		"icon": "fa-github",
 		"imgAlt": "Logo Github"
 	},
 	{
 		"href": "https://www.facebook.com/logan.wi322/",
-		"imgSrc": "facebook.svg",
+		"icon": "fa-facebook",
 		"imgAlt": "Logo Facebook"
 	},
 	{
 		"href": "https://steamcommunity.com/id/logan2234/",
-		"imgSrc": "steam.svg",
+		"icon": "fa-steam",
 		"imgAlt": "Logo Steam"
 	}
 ]

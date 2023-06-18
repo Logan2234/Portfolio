@@ -1,0 +1,47 @@
+[
+	{
+		"name": "HTML",
+		"color": "#F16529",
+		"img": ""
+	},
+	{
+		"name": "CSS",
+		"color": "#2965F1",
+		"img": ""
+	},
+	{
+		"name": "Javascript",
+		"color": "#F7DF1E",
+		"img": ""
+	},
+	{
+		"name": "Rust",
+		"color": "#DEA584",
+		"img": ""
+	},
+	{
+		"name": "Python",
+		"color": "#3572A5",
+		"img": ""
+	},
+	{
+		"name": "GLSL",
+		"color": "#5487B2",
+		"img": ""
+	},
+	{
+		"name": "C",
+		"color": "#00599D",
+		"img": ""
+	},
+	{
+		"name": "Java",
+		"color": "#B07219",
+		"img": ""
+	},
+	{
+		"name": "SQL",
+		"color": "#3399DB",
+		"img": ""
+	}
+]
