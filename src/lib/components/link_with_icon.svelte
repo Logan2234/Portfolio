@@ -9,7 +9,6 @@
 
 <style>
 	.link {
-		color: white;
 		align-self: center;
 		border: solid 2px white;
 		padding: 10px;

@@ -52,7 +52,6 @@
 	}
 
 	.project-info {
-		color: white;
 		position: absolute;
 		visibility: hidden;
 	}

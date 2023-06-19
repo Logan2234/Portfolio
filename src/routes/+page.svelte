@@ -45,7 +45,6 @@
 
 <style>
 	.down {
-		color: white;
 		position: absolute;
 		top: 90vh;
 		animation: fly 1.5s infinite;

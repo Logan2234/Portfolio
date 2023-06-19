@@ -13,10 +13,11 @@
 - ~~Navigate through the history~~ (v0.11)
 - ~~Better header (when hovering links)~~ (v1.0)
 - Mobile version
-- Change the way link color is computed
+- ~~Change the way link color is computed~~ (v1.1)
 - Make tests
 
 ## Reported bug
 
 - ~~`add` and `remove` can be successfully executed with strings~~ (v0.10)
 - Lag when scrolling between Summary and About sections
+- Clicking on another project when already viewing a project doesn't render the new page

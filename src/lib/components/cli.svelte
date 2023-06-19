@@ -129,7 +129,6 @@
 	#cli_prompt {
 		background-color: black;
 		border: white 2px solid;
-		color: white;
 		font-family: 'Courier New', Courier, monospace;
 		font-size: 1em;
 		width: 40%;

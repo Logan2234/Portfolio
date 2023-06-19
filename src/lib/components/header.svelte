@@ -49,7 +49,6 @@
 	}
 
 	.inside_link {
-		color: white;
 		display: block;
 		font-size: 1.3em;
 		padding: 1.5vh 2vw;
