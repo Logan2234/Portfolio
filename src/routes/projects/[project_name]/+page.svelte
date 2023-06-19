@@ -6,15 +6,32 @@
 	import { IMG_PATH } from '$lib/constants/other';
 	import type { Project } from '$lib/interfaces/project';
 
+	let zoomImg: HTMLImageElement;
+
 	const project: Project = projects.filter(
 		(project: Project) => project.url === $page.params.project_name
 	)[0];
+
+	function zoomIn(
+		event:
+			| (KeyboardEvent & { currentTarget: EventTarget & HTMLImageElement })
+			| (MouseEvent & { currentTarget: EventTarget & HTMLImageElement })
+	): void {
+		zoomImg = event.currentTarget;
+	}
 </script>
 
 <div class="container">
+	{#if zoomImg !== undefined}
+		<div class="zoom-container">
+			<img src={zoomImg.src} alt="Zoomed project img" />
+		</div>
+	{/if}
 	<h1>{project.name}</h1>
 	<div class="center">
 		<img
+			on:click={zoomIn}
+			on:keypress={zoomIn}
 			class="project-img"
 			src="{IMG_PATH}{project.img !== '' ? project.img : 'default-image-placeholder.png'}"
 			alt="Project"
@@ -38,6 +55,17 @@
 </div>
 
 <style>
+	.zoom-container {
+		align-items: center;
+		background-color: rgba(50, 50, 50, 0.8);
+		display: flex;
+		justify-content: center;
+		height: 100%;
+		position: fixed;
+		width: 100%;
+		z-index: 1;
+	}
+
 	.container {
 		align-items: center;
 		display: flex;
@@ -48,6 +76,8 @@
 	}
 
 	.project-img {
+		border-radius: 12px;
+		cursor: zoom-in;
 		height: auto;
 		width: 400px;
 	}

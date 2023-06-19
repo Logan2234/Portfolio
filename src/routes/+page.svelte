@@ -18,9 +18,9 @@
 
 <main>
 	<section class="summary">
-		<h1 id="summary_name">Logan Willem</h1>
-		<h3 id="summary_motto">Software Engineer</h3>
-		<div id="social_media">
+		<h1 class="summary-name">Logan Willem</h1>
+		<h3 class="summary-motto">Software Engineer</h3>
+		<div class="social-media">
 			{#each links as link}
 				<LinkWithIcon href={link.href} icon={link.icon} />
 			{/each}
@@ -30,7 +30,7 @@
 		</a>
 	</section>
 
-	<div id="#about">
+	<div id="about">
 		<Section title="About">
 			<About />
 		</Section>
@@ -56,28 +56,28 @@
 		flex-direction: column;
 		justify-content: center;
 		gap: 30px;
-		height: 100vh;
+		height: calc(97vh - 1.3em);
 	}
 
-	#summary_name {
+	.summary-name {
 		font-size: 7em;
 		margin: 20px 0px;
 		font-family: 'Montserrat';
 		text-align: center;
 	}
 
-	#summary_motto {
+	.summary-motto {
 		font-size: 3em;
 		margin: 0 0 30px 0;
 		text-align: center;
 	}
 
-	#social_media {
+	.social-media {
 		max-width: 500px;
 		width: 100%;
 	}
 
-	#social_media {
+	.social-media {
 		display: flex;
 		justify-content: space-evenly;
 	}
