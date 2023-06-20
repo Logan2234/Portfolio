@@ -76,8 +76,8 @@
 	}
 
 	.project-img {
-		border-radius: 12px;
 		cursor: zoom-in;
+		border-radius: 6px;
 		height: auto;
 		width: 400px;
 	}
