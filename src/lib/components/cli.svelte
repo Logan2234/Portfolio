@@ -105,8 +105,7 @@
 			name="command"
 			style:color={valid ? 'rgb(70, 197, 123)' : 'rgb(197, 70, 70)'}
 			on:keyup={cliKeyPress}
-			bind:value={inputValue}
-		/>
+			bind:value={inputValue} />
 	</div>
 {/if}
 

@@ -20,8 +20,7 @@
 		id="form"
 		method="post"
 		enctype="text/plain"
-		action="mailto:loganwi322@gmail.com?subject=Email sent via the portfolio"
-	>
+		action="mailto:loganwi322@gmail.com?subject=Email sent via the portfolio">
 		<div class="form-component">
 			<label class="label" for="form_name" style:visibility={nameValue ? 'visible' : 'hidden'}
 				>Name
@@ -35,8 +34,7 @@
 				type="text"
 				required
 				placeholder="Name"
-				name="name"
-			/>
+				name="name" />
 		</div>
 		<div class="form-component">
 			<label
@@ -54,8 +52,7 @@
 				type="email"
 				required
 				placeholder="Email"
-				name="email"
-			/>
+				name="email" />
 		</div>
 		<div class="form-component">
 			<label
@@ -75,8 +72,7 @@
 				maxlength="2000"
 				minlength="20"
 				name="content"
-				spellcheck="true"
-			/>
+				spellcheck="true" />
 		</div>
 		<input
 			class="submit"
@@ -84,8 +80,7 @@
 			value="Send"
 			class:submit-valid={valid}
 			class:submit-invalid={!valid}
-			disabled={!valid}
-		/>
+			disabled={!valid} />
 	</form>
 </div>
 

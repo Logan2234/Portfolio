@@ -11,8 +11,7 @@
 					class="project-image"
 					src={IMG_PATH +
 						(project.img != '' ? project.img : 'default-image-placeholder.png')}
-					alt="Project"
-				/>
+					alt="Project" />
 				<div class="project-info">{project.name}</div>
 			</div>
 		</a>

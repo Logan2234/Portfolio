@@ -83,8 +83,7 @@
 	height={documentHeight}
 	bind:this={canvasElement}
 	on:click={mouseClick}
-	on:mousemove={mouseMove}
-/>
+	on:mousemove={mouseMove} />
 
 <style>
 	canvas {

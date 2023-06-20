@@ -19,14 +19,12 @@
 			<li>
 				<span>Linkedin:</span>
 				<a class="link" target="_blank" href="https://www.linkedin.com/in/logan-willem/"
-					>Logan Willem</a
-				>
+					>Logan Willem</a>
 			</li>
 			<li>
 				<span>Facebook:</span>
 				<a class="link" target="_blank" href="https://www.facebook.com/logan.wi322/"
-					>logan.wi322</a
-				>
+					>logan.wi322</a>
 			</li>
 		</ul>
 	</div>

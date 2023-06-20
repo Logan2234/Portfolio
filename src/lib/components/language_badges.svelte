@@ -8,8 +8,7 @@
 	{#each languages as language}
 		<div
 			class="badge"
-			style:--color={code_language.filter((elem) => elem.name === language)[0].color}
-		>
+			style:--color={code_language.filter((elem) => elem.name === language)[0].color}>
 			{language}
 		</div>
 	{/each}

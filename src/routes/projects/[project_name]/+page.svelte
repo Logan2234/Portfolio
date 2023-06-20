@@ -31,11 +31,9 @@
 	<div class="center">
 		<img
 			on:click={zoomIn}
-			on:keypress={zoomIn}
 			class="project-img"
 			src="{IMG_PATH}{project.img !== '' ? project.img : 'default-image-placeholder.png'}"
-			alt="Project"
-		/>
+			alt="Project" />
 		<div class="right-panel">
 			<h2 class="info-title">Info</h2>
 			<LanguageBadges languages={project.language}>{project.language}</LanguageBadges>
@@ -57,11 +55,12 @@
 <style>
 	.zoom-container {
 		align-items: center;
-		background-color: rgba(50, 50, 50, 0.8);
+		background-color: rgba(50, 50, 50, 0.9);
 		display: flex;
 		justify-content: center;
 		height: 100%;
 		position: fixed;
+		top: 0;
 		width: 100%;
 		z-index: 1;
 	}

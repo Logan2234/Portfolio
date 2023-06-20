@@ -25,8 +25,8 @@
 				<LinkWithIcon href={link.href} icon={link.icon} />
 			{/each}
 		</div>
-		<a class="down" href="#about"
-			><i class="fa fa-angle-double-down fa-3x" aria-hidden="true" />
+		<a class="down" href="#about">
+			<i class="fa fa-angle-double-down fa-3x" aria-hidden="true" />
 		</a>
 	</section>
 
