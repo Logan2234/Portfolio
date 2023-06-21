@@ -6,6 +6,8 @@ import { Particle } from './particle';
 import { RGBAtoString, randomColor } from '$lib/utils/color';
 
 export class Particles {
+	static mode = ParticleAnimationMode.NONE;
+
 	private particles: Particle[];
 
 	constructor(particles: Particle[]) {
@@ -34,42 +36,47 @@ export class Particles {
 		for (let i = 0; i < nb; i++) this.particles.pop();
 	}
 
+	public destroy(): void {
+		this.particles = [];
+		Particles.mode = ParticleAnimationMode.NONE;
+	}
+
 	public move(canvasElement: HTMLCanvasElement, canvasContext: CanvasRenderingContext2D): void {
 		canvasContext.clearRect(0, 0, canvasElement.width, canvasElement.height);
 		if (get(backgroundAnimationType) === BackgroundAnimationType.PARTICLES) {
 			for (const elt of this.particles) {
-				if (Particle.mode) elt.computeGravity(this.particles);
+				if (Particles.mode) elt.computeGravity(this.particles);
 
 				elt.move(canvasElement.width, canvasElement.height);
-				elt.draw(canvasContext, this.particles, Particle.mode);
+				elt.draw(canvasContext, this.particles, Particles.mode);
 			}
 			setTimeout(() => this.move(canvasElement, canvasContext), 10);
 		}
 	}
 
 	public toggleColor(): void {
-		if (Particle.mode === ParticleAnimationMode.COLOR) {
+		if (Particles.mode === ParticleAnimationMode.COLOR) {
 			for (const elt of this.particles) {
 				elt.setColor = WHITE;
 			}
-			Particle.mode = ParticleAnimationMode.NONE;
+			Particles.mode = ParticleAnimationMode.NONE;
 		} else {
 			for (const elt of this.particles) {
-				if (Particle.mode === ParticleAnimationMode.GRAVITY) elt.resetMode();
+				if (Particles.mode === ParticleAnimationMode.GRAVITY) elt.resetMode();
 				elt.setColor = RGBAtoString(randomColor());
 			}
-			Particle.mode = ParticleAnimationMode.COLOR;
+			Particles.mode = ParticleAnimationMode.COLOR;
 		}
 	}
 
 	public toggleGravity() {
-		if (Particle.mode === ParticleAnimationMode.GRAVITY) {
-			Particle.mode = ParticleAnimationMode.NONE;
+		if (Particles.mode === ParticleAnimationMode.GRAVITY) {
+			Particles.mode = ParticleAnimationMode.NONE;
 			for (const elt of this.particles) {
 				elt.resetMode();
 			}
 		} else {
-			Particle.mode = ParticleAnimationMode.GRAVITY;
+			Particles.mode = ParticleAnimationMode.GRAVITY;
 			for (const elt of this.particles) {
 				if (Math.random() <= 0.5) {
 					elt.modeRepulsive();

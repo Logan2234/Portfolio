@@ -3,13 +3,12 @@ import { DIST_LINK, GravityParticleType, ParticleAnimationMode } from '$lib/cons
 import { distanceWithPoints } from '$lib/utils/math';
 
 export class Particle {
-	static mode = ParticleAnimationMode.NONE;
 	private readonly position: Position;
 	private readonly angle = Math.random() * Math.PI * 2;
 	private vx = Math.cos(this.angle);
 	private vy = Math.sin(this.angle);
 	private color = 'rgb(150,150,150)';
-	private mode = GravityParticleType.NONE;
+	private particleMode = GravityParticleType.NONE;
 
 	constructor(x: number, y: number) {
 		this.position = new Position(x, y);
@@ -28,7 +27,7 @@ export class Particle {
 	}
 
 	public get getMode(): number {
-		return this.mode;
+		return this.particleMode;
 	}
 
 	public get getColor(): string {
@@ -43,17 +42,17 @@ export class Particle {
 		this.vx = Math.cos(this.angle);
 		this.vy = Math.sin(this.angle);
 		this.color = 'rgb(150,150,150)';
-		this.mode = GravityParticleType.NONE;
+		this.particleMode = GravityParticleType.NONE;
 	}
 
 	public modeRepulsive(): void {
 		this.color = 'rgb(255, 120, 120)';
-		this.mode = GravityParticleType.REPULSIVE;
+		this.particleMode = GravityParticleType.REPULSIVE;
 	}
 
 	public modeAttractive(): void {
 		this.color = 'rgb(120, 120, 255)';
-		this.mode = GravityParticleType.ATTRACTIVE;
+		this.particleMode = GravityParticleType.ATTRACTIVE;
 	}
 
 	public draw(
@@ -103,7 +102,7 @@ export class Particle {
 			if (elt != this) {
 				const dist = distanceWithPoints(this.position, elt.getPos);
 				if (dist <= DIST_LINK) {
-					const force = (this.mode * elt.getMode) / dist;
+					const force = (this.particleMode * elt.getMode) / dist;
 					const angle = Math.atan((this.getY - elt.getY) / (this.getX - elt.getX));
 					if (
 						(this.getY - elt.getY <= 0 && this.getX - elt.getX <= 0) ||

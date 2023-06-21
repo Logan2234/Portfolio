@@ -19,5 +19,6 @@
 ## Reported bug
 
 -   ~~`add` and `remove` can be successfully executed with strings~~ (v0.10)
--   Lag when scrolling between Summary and About sections
+-   ~~Switching between projects and home creates a new Particles object adding computation, so lag~~ (v1.2)
+-	Lag when scrolling between Summary and About sections
 -   Clicking on another project when already viewing a project doesn't render the new page

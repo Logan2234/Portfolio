@@ -12,7 +12,7 @@
 	} from '$lib/services/command-service';
 	import { backgroundAnimationType, hasScrolled } from '$lib/stores/stores';
 	import { distanceWithCoord } from '$lib/utils/math';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	let documentWidth: number;
 	let documentHeight: number;
@@ -54,6 +54,10 @@
 				value ? BackgroundAnimationType.NONE : BackgroundAnimationType.PARTICLES
 			)
 		);
+	});
+
+	onDestroy(() => {
+		particles.destroy();
 	});
 
 	function mouseMove(event: MouseEvent): void {
