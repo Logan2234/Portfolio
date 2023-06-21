@@ -15,6 +15,7 @@
 -   Mobile version
 -   ~~Change the way link color is computed~~ (v1.1)
 -   Make tests
+-	~~Project image zoom in and out (v1.3)~~
 
 ## Reported bug
 

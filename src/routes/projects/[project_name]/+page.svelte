@@ -5,33 +5,33 @@
 	import projects from '$lib/conf/projects.json';
 	import { IMG_PATH } from '$lib/constants/other';
 	import type { Project } from '$lib/interfaces/project';
+	import { fade } from 'svelte/transition';
 
-	let zoomImg: HTMLImageElement;
+	let zoomImg: HTMLImageElement | null = null;
 
 	const project: Project = projects.filter(
 		(project: Project) => project.url === $page.params.project_name
 	)[0];
 
-	function zoomIn(
+	function toogleZoom(
 		event:
 			| (KeyboardEvent & { currentTarget: EventTarget & HTMLImageElement })
 			| (MouseEvent & { currentTarget: EventTarget & HTMLImageElement })
 	): void {
-		zoomImg = event.currentTarget;
+		zoomImg = zoomImg === null ? event.currentTarget : null;
 	}
 </script>
 
 <div class="container">
-	{#if zoomImg !== undefined}
-		<div class="zoom-container">
-			<img src={zoomImg.src} alt="Zoomed project img" />
-		</div>
+	{#if zoomImg}
+		<div transition:fade={{ duration: 100 }} class:zoom-container={zoomImg} />
 	{/if}
 	<h1>{project.name}</h1>
 	<div class="center">
 		<img
-			on:click={zoomIn}
-			class="project-img"
+			on:click={toogleZoom}
+			on:keydown={toogleZoom}
+			class="project-img {zoomImg !== null ? 'zoom-in' : 'zoom-out'}"
 			src="{IMG_PATH}{project.img !== '' ? project.img : 'default-image-placeholder.png'}"
 			alt="Project" />
 		<div class="right-panel">
@@ -54,10 +54,7 @@
 
 <style>
 	.zoom-container {
-		align-items: center;
-		background-color: rgba(50, 50, 50, 0.9);
-		display: flex;
-		justify-content: center;
+		background-color: rgba(40, 40, 40, 0.9);
 		height: 100%;
 		position: fixed;
 		top: 0;
@@ -78,7 +75,9 @@
 		cursor: zoom-in;
 		border-radius: 6px;
 		height: auto;
+		transition: linear 0.1s;
 		width: 400px;
+		z-index: 1;
 	}
 
 	.center {
@@ -111,5 +110,13 @@
 		max-width: 80%;
 		padding: 20px;
 		text-align: center;
+	}
+
+	.zoom-in {
+		transform: scale(1.4) translateX(12.75vw) translateY(5vh);
+	}
+
+	.zoom-out {
+		transform: scale(1) translateX(0) translateY(0);
 	}
 </style>
