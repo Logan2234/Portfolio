@@ -15,7 +15,7 @@
 -   Mobile version
 -   ~~Change the way link color is computed~~ (v1.1)
 -   Make tests
--	~~Project image zoom in and out (v1.3)~~
+-	~~Project image zoom in and out~~ (v1.3)
 
 ## Reported bug
 
@@ -23,3 +23,4 @@
 -   ~~Switching between projects and home creates a new Particles object adding computation, so lag~~ (v1.2)
 -	Lag when scrolling between Summary and About sections
 -   Clicking on another project when already viewing a project doesn't render the new page
+-	About content disappearing when scrolling

@@ -26,12 +26,13 @@
 	{#if zoomImg}
 		<div transition:fade={{ duration: 100 }} class:zoom-container={zoomImg} />
 	{/if}
-	<h1>{project.name}</h1>
+	<h1 class="title">{project.name}</h1>
 	<div class="center">
 		<img
 			on:click={toogleZoom}
 			on:keydown={toogleZoom}
-			class="project-img {zoomImg !== null ? 'zoom-in' : 'zoom-out'}"
+			class:zoom-in={zoomImg !== null}
+			class="project-img"
 			src="{IMG_PATH}{project.img !== '' ? project.img : 'default-image-placeholder.png'}"
 			alt="Project" />
 		<div class="right-panel">
@@ -62,6 +63,10 @@
 		z-index: 1;
 	}
 
+	.title {
+		text-align: center;
+	}
+
 	.container {
 		align-items: center;
 		display: flex;
@@ -77,14 +82,13 @@
 		height: auto;
 		transition: linear 0.1s;
 		width: 400px;
-		z-index: 1;
 	}
 
 	.center {
 		align-items: center;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 50px;
+		gap: 40px;
 		justify-content: space-evenly;
 		width: 100%;
 	}
@@ -94,13 +98,13 @@
 		border-radius: 12px;
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
-		max-width: 25%;
+		gap: 30px;
+		max-width: 51%;
+		min-width: 12%;
 		padding: 20px;
 	}
 
 	.info-title {
-		padding: 8px;
 		text-align: center;
 	}
 
@@ -114,9 +118,6 @@
 
 	.zoom-in {
 		transform: scale(1.4) translateX(12.75vw) translateY(5vh);
-	}
-
-	.zoom-out {
-		transform: scale(1) translateX(0) translateY(0);
+		z-index: 1;
 	}
 </style>

@@ -74,7 +74,7 @@
 		"img": "",
 		"url": "portfolio",
 		"github": "https://github.com/Logan2234/Portfolio",
-		"language": ["TypeScript", "HTML", "CSS"],
+		"language": ["Typescript", "HTML", "CSS"],
 		"personalProject": true,
 		"ongoing": true,
 		"description": "TODO: Description"
