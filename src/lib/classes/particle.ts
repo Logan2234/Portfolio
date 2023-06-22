@@ -5,10 +5,11 @@ import { distanceWithPoints } from '$lib/utils/math';
 export class Particle {
 	private readonly position: Position;
 	private readonly angle = Math.random() * Math.PI * 2;
-	private vx = Math.cos(this.angle);
-	private vy = Math.sin(this.angle);
-	private color = 'rgb(150,150,150)';
+	private v = 1;
+	private color = 'rgb(150, 150, 150, 255)';
 	private particleMode = GravityParticleType.NONE;
+	private vx = this.v * Math.cos(this.angle);
+	private vy = this.v * Math.sin(this.angle);
 
 	constructor(x: number, y: number) {
 		this.position = new Position(x, y);
@@ -41,17 +42,17 @@ export class Particle {
 	public resetMode(): void {
 		this.vx = Math.cos(this.angle);
 		this.vy = Math.sin(this.angle);
-		this.color = 'rgb(150,150,150)';
+		this.color = 'rgba(150,150,150, 255)';
 		this.particleMode = GravityParticleType.NONE;
 	}
 
 	public modeRepulsive(): void {
-		this.color = 'rgb(255, 120, 120)';
+		this.color = 'rgba(255, 120, 120, 255)';
 		this.particleMode = GravityParticleType.REPULSIVE;
 	}
 
 	public modeAttractive(): void {
-		this.color = 'rgb(120, 120, 255)';
+		this.color = 'rgba(120, 120, 255, 255)';
 		this.particleMode = GravityParticleType.ATTRACTIVE;
 	}
 
@@ -68,20 +69,20 @@ export class Particle {
 
 		particle_array.forEach((elt) => {
 			const dist = distanceWithPoints(this.position, elt.getPos);
-			if (this !== elt && dist <= DIST_LINK + 30) {
+			if (this !== elt && dist <= DIST_LINK) {
 				const transparence = 1 - dist / DIST_LINK;
 				canvasContext.moveTo(this.getX, this.getY);
 				canvasContext.lineTo(elt.getX, elt.getY);
 				if (mode === ParticleAnimationMode.COLOR) {
-					const rgb_curr = this.color.replace('rgb(', '').replace(')', '').split(', ');
-					const rgb_elt = elt.getColor.replace('rgb(', '').replace(')', '').split(', ');
+					const rgb_curr = this.color.replace('rgba(', '').replace(')', '').split(', ');
+					const rgb_elt = elt.getColor.replace('rgba(', '').replace(')', '').split(', ');
 					const res = []; // TODO to change the way this is computed
-					for (let i = 0; i < 3; i++) {
+					for (let i = 0; i < 3; i++)
 						res.push((parseInt(rgb_curr[i]) + parseInt(rgb_elt[i])) / 2);
-					}
-					canvasContext.strokeStyle = `rgba(${res[0]},${res[1]},${res[2]},${transparence})`;
+
+					canvasContext.strokeStyle = `rgba(${res[0]}, ${res[1]}, ${res[2]}, ${transparence})`;
 				} else {
-					canvasContext.strokeStyle = 'rgba(100,100,100,' + transparence + ')';
+					canvasContext.strokeStyle = `rgba(100, 100, 100, ${transparence})`;
 				}
 				canvasContext.stroke();
 			}

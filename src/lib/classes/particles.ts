@@ -45,7 +45,8 @@ export class Particles {
 		canvasContext.clearRect(0, 0, canvasElement.width, canvasElement.height);
 		if (get(backgroundAnimationType) === BackgroundAnimationType.PARTICLES) {
 			for (const elt of this.particles) {
-				if (Particles.mode) elt.computeGravity(this.particles);
+				if (Particles.mode === ParticleAnimationMode.GRAVITY)
+					elt.computeGravity(this.particles);
 
 				elt.move(canvasElement.width, canvasElement.height);
 				elt.draw(canvasContext, this.particles, Particles.mode);

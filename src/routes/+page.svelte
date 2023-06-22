@@ -19,7 +19,7 @@
 <main>
 	<section class="summary">
 		<h1 class="summary-name">Logan Willem</h1>
-		<h3 class="summary-motto">Software Engineer</h3>
+		<h3 class="summary-motto">Almost Software Engineer</h3>
 		<div class="social-media">
 			{#each links as link}
 				<LinkWithIcon href={link.href} icon={link.icon} />
