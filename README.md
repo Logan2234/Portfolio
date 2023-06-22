@@ -24,3 +24,4 @@
 -	Lag when scrolling between Summary and About sections
 -   Clicking on another project when already viewing a project doesn't render the new page
 -	About content disappearing when scrolling
+-	Canvas not clickable

@@ -42,14 +42,18 @@ export function reload(): number {
 
 export function addParticles(
 	particles: Particles,
-	nb: number,
+	nbStr: string,
 	canvasElement: HTMLCanvasElement
 ): number {
+	const nb = parseInt(nbStr);
+	if (isNaN(nb)) return CommandReturnCode.BAD_USAGE;
 	particles.addParticles(nb, canvasElement);
 	return CommandReturnCode.SUCCESS;
 }
 
-export function removeParticles(particles: Particles, nb: number): number {
+export function removeParticles(particles: Particles, nbStr: string): number {
+	const nb = parseInt(nbStr);
+	if (isNaN(nb)) return CommandReturnCode.BAD_USAGE;
 	particles.removeParticles(nb);
 	return CommandReturnCode.SUCCESS;
 }
