@@ -8,6 +8,12 @@
 	import links from '$lib/conf/links.json';
 	import Portfolio from '$lib/components/portfolio.svelte';
 	import LinkWithIcon from '$lib/components/link_with_icon.svelte';
+	import { fly } from 'svelte/transition';
+	import { onMount } from 'svelte';
+
+	let mounted = false;
+
+	onMount(() => (mounted = true));
 </script>
 
 <HelpModal />
@@ -18,18 +24,23 @@
 
 <main>
 	<section class="summary">
-		<h1 class="summary-name">Logan Willem</h1>
-		<h3 class="summary-motto">Almost Software Engineer</h3>
-		<div class="social-media">
-			{#each links as link}
-				<LinkWithIcon href={link.href} icon={link.icon} />
-			{/each}
-		</div>
-		<a class="down" href="#about">
-			<i class="fa fa-angle-double-down fa-3x" aria-hidden="true" />
-		</a>
+		{#if mounted}
+			<h1 transition:fly={{ x: 50, delay: 1000, duration: 1000 }} class="summary-name">
+				Logan Willem
+			</h1>
+			<h3 transition:fly={{ x: 50, delay: 1500, duration: 1000 }} class="summary-motto">
+				Almost Software Engineer
+			</h3>
+			<div transition:fly={{ x: 50, delay: 2000, duration: 1000 }} class="social-media">
+				{#each links as link}
+					<LinkWithIcon href={link.href} icon={link.icon} />
+				{/each}
+			</div>
+			<a class="down" href="#about">
+				<i class="fa fa-angle-double-down fa-3x" aria-hidden="true" />
+			</a>
+		{/if}
 	</section>
-
 	<div id="about">
 		<Section title="About">
 			<About />
