@@ -7,6 +7,5 @@ export const scrollY = writable(0);
 export const hasScrolled = writable(false);
 scrollY.subscribe((value) => hasScrolled.set(value > get(screenSize) - 1));
 
-export const helpDisplayed = writable(false);
 export const cliDisplayed = writable(false);
 export const backgroundAnimationType = writable(BackgroundAnimationType.PARTICLES);

@@ -1,26 +1,19 @@
 <script lang="ts">
-	import { helpDisplayed } from '$lib/stores/stores';
+	import { fade, fly } from 'svelte/transition';
 
-	let displayHelp = true;
-	let timeoutReached = true;
-	let helpLoaded = false;
+	let displayHelp = false;
 
-	function handleHelpDisplayedChange() {
-		displayHelp = !displayHelp;
-		if (timeoutReached)
-			setTimeout(() => {
-				timeoutReached = !timeoutReached;
-				if (!helpLoaded) helpLoaded = true;
-			}, 500);
-		else timeoutReached = !timeoutReached;
+	function handleKeypress(event: KeyboardEvent) {
+		// TODO wait this is supposed to be found in shortcuts.json
+		if (event.key === '?' && event.shiftKey === true) displayHelp = !displayHelp;
 	}
-
-	helpDisplayed.subscribe(handleHelpDisplayedChange);
 </script>
 
-{#if timeoutReached && helpLoaded}
-	<div id="help">
-		<div class={displayHelp ? 'help_shown' : 'help_hidden'} id="help_content">
+<svelte:body on:keypress={(event) => handleKeypress(event)} />
+
+{#if displayHelp}
+	<div id="help" transition:fade={{ duration: 200 }}>
+		<div transition:fly={{ duration: 500, y: -200 }} id="help_content">
 			<h2>Commands:</h2>
 			<ul>
 				<!-- TODO FOREACH -->
@@ -66,14 +59,6 @@
 		box-shadow: black 2px 2px 10px 0;
 	}
 
-	.help_shown {
-		animation: showHelp 0.4s forwards;
-	}
-
-	.help_hidden {
-		animation: hideHelp 0.4s forwards;
-	}
-
 	.command_item {
 		padding: 7px 0;
 	}
@@ -82,33 +67,5 @@
 		border-radius: 5px;
 		padding: 4px;
 		border: rgb(70, 70, 70) thin groove;
-	}
-
-	@keyframes showHelp {
-		0% {
-			transform: scale(0);
-		}
-
-		50% {
-			transform: scale(1.1);
-		}
-
-		100% {
-			transform: scale(1);
-		}
-	}
-
-	@keyframes hideHelp {
-		0% {
-			transform: scale(1);
-		}
-
-		40% {
-			transform: scale(1.1);
-		}
-
-		100% {
-			transform: scale(0);
-		}
 	}
 </style>
