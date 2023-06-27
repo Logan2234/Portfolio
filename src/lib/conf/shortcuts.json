@@ -1,38 +1,44 @@
 [
 	{
-		"shortcut": "C",
+		"name": "Color",
+		"shortcut": "c",
 		"function": "toggleColor",
 		"preventDefault": false,
-		"description": ""
+		"description": "Toggle animated background color mode"
 	},
 	{
-		"shortcut": "G",
+		"name": "Gravity",
+		"shortcut": "g",
 		"function": "toggleGravity",
 		"preventDefault": false,
-		"description": ""
+		"description": "Toggle animated background gravity mode"
 	},
 	{
+		"name": "CLI",
+		"shortcut": "t",
+		"function": "displayCLI",
+		"preventDefault": true,
+		"description": "Toggle the command line interface"
+	},
+	{
+		"name": "AddParticle",
 		"shortcut": "+",
 		"function": "createParticle",
 		"preventDefault": false,
-		"description": ""
+		"description": "Add a particle"
 	},
 	{
+		"name": "RemoveParticle",
 		"shortcut": "-",
 		"function": "removeParticle",
 		"preventDefault": false,
-		"description": ""
+		"description": "Remove one particle"
 	},
 	{
+		"name": "Help",
 		"shortcut": "?",
 		"function": "displayHelp",
 		"preventDefault": false,
-		"description": ""
-	},
-	{
-		"shortcut": "T",
-		"function": "displayCLI",
-		"preventDefault": true,
-		"description": ""
+		"description": "Toggle this help menu"
 	}
 ]

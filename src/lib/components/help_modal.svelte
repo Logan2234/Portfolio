@@ -1,37 +1,32 @@
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition';
+	import shortcuts from '$lib/conf/shortcuts.json';
 
 	let displayHelp = false;
 
 	function handleKeypress(event: KeyboardEvent) {
-		// TODO wait this is supposed to be found in shortcuts.json
-		if (event.key === '?' && event.shiftKey === true) displayHelp = !displayHelp;
+		if (
+			event.key === shortcuts.filter((elem) => elem.name === 'Help')[0].shortcut &&
+			event.target instanceof HTMLBodyElement
+		)
+			displayHelp = !displayHelp;
 	}
 </script>
 
 <svelte:body on:keypress={(event) => handleKeypress(event)} />
 
 {#if displayHelp}
-	<div id="help" transition:fade={{ duration: 200 }}>
-		<div transition:fly={{ duration: 500, y: -200 }} id="help_content">
-			<h2>Commands:</h2>
-			<ul>
-				<!-- TODO FOREACH -->
-				<li class="command_item">
-					<span class="key">Shift</span> + <span class="key">?</span> : Toggle this help menu
-				</li>
-				<li class="command_item">
-					<span class="key">Shift</span> + <span class="key">C</span> : Toggle color mode
-				</li>
-				<li class="command_item">
-					<span class="key">Shift</span> + <span class="key">G</span> : Toggle gravity mode
-				</li>
-				<li class="command_item">
-					<span class="key">Shift</span> + <span class="key">+</span> : Adds a particle
-				</li>
-				<li class="command_item">
-					<span class="key">Shift</span> + <span class="key">-</span> : Removes a particle
-				</li>
+	<div class="help-container" transition:fade={{ duration: 200 }}>
+		<div transition:fly={{ duration: 500, y: -200 }} class="help-content">
+			<h2 class="help-title">Commands</h2>
+			<ul class="commands">
+				{#each shortcuts as shortcut}
+					<li class="command-item">
+						<p>
+							<span class="key">{shortcut.shortcut.toUpperCase()}</span>: {shortcut.description}
+						</p>
+					</li>
+				{/each}
 				<li class="command_item">
 					<span class="key">Left click</span> : Adds a particle at cursor position
 				</li>
@@ -41,10 +36,10 @@
 {/if}
 
 <style>
-	#help {
-		display: flex;
-		background-color: rgba(50, 50, 50, 0.9);
+	.help-container {
 		align-items: center;
+		background-color: rgba(50, 50, 50, 0.9);
+		display: flex;
 		justify-content: center;
 		height: 100%;
 		position: fixed;
@@ -52,20 +47,28 @@
 		z-index: 2;
 	}
 
-	#help_content {
+	.help-content {
 		background-color: rgb(25, 25, 25);
-		padding: 50px 50px 50px 50px;
 		border-radius: 30px;
-		box-shadow: black 2px 2px 10px 0;
+		box-shadow: lightgrey 0 0 6px;
+		padding: 50px;
 	}
 
-	.command_item {
-		padding: 7px 0;
+	.help-title {
+		margin-bottom: 30px;
+	}
+
+	.commands {
+		display: flex;
+		flex-direction: column;
+		list-style: none;
 	}
 
 	.key {
-		border-radius: 5px;
-		padding: 4px;
-		border: rgb(70, 70, 70) thin groove;
+		border: 1px solid rgb(70, 70, 70);
+		border-radius: 6px;
+		display: inline-block;
+		margin: 10px 5px;
+		padding: 6px 10px;
 	}
 </style>
